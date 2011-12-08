@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer;
 
-/*
- * $Id: AddTracer.java 110 2006-09-19 12:10:06Z harua-t $
- */
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.lang.instrument.ClassFileTransformer;
@@ -29,7 +25,6 @@ import org.apache.bcel.classfile.JavaClass;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
  */
 public class AddTracerTransformer implements ClassFileTransformer{
     private AddTracer tracer;

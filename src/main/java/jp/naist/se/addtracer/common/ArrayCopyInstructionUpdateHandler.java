@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.common;
 
-/*
- * $Id: ArrayCopyInstructionUpdateHandler.java 111 2006-09-19 12:10:31Z harua-t $
- */
-
 import jp.cafebabe.commons.bcul.updater.MethodCreatable;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
@@ -41,7 +37,6 @@ import org.apache.bcel.generic.Type;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision: 111 $ $Date: 2006-09-19 21:10:31 +0900 (Tue, 19 Sep 2006) $
  */
 public class ArrayCopyInstructionUpdateHandler extends TracerInstructionUpdateHandler implements MethodCreatable{
     private Method arraycopy = null;

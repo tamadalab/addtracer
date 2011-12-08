@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.std;
 
-/*
- * $Id: ArrayLoadInstructionUpdateHandler.java 89 2006-09-15 06:01:55Z harua-t $
- */
-
 import jp.cafebabe.commons.bcul.SWAP2;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
@@ -37,7 +33,6 @@ import org.apache.bcel.generic.Type;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 89 $ $Date: 2006-09-15 15:01:55 +0900 (Fri, 15 Sep 2006) $
  */
 public class ArrayLoadInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     @Override
