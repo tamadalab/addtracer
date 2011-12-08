@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="AddTracer">
+  <bannerLeft>
+    <name>NAIST SE Lab.</name>
+    <src>images/selogo.png</src>
+    <href>http://se.naist.jp/</href>
+    <alt>se.naist.jp</alt>
+  </bannerLeft>
+  <bannerRight>
+    <name>AddTracer</name>
+    <src>images/addtracer.png</src>
+  </bannerRight>
+  <body>
+    <menu name="AddTracer">
+      <item name="Introduction"        href="index.html"/>
+      <item name="Download"            href="download.html"/>
+      <item name="License"             href="license.html"/>
+    </menu>
+
+    <menu name="Links">
+      <item name="SE Lab., NAIST"      href="http://se.naist.jp/" />
+      <item name="DonQuixote"          href="http://donquixote.cafebabe.jp/" />
+    </menu>
+
+    ${reports}
+
+  </body>
+</project>

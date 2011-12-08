@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="euc-jp"?>
+
+<!-- $Id: options.xml 140 2006-10-24 04:39:28Z harua-t $ -->
+
+<command-line name="addtracer">
+  <definitions>
+    <definition name="help">
+      <short-option>h</short-option>
+      <long-option>help</long-option>
+      <description>Print this message</description>
+    </definition>
+
+    <definition name="dest">
+      <short-option>d</short-option>
+      <long-option>dest</long-option>
+      <argument>REQUIRE</argument>
+      <argument-name>DEST</argument-name>
+      <value-separator>=</value-separator>
+      <description>Set destination directory</description>
+    </definition>
+
+    <definition name="license">
+      <short-option>l</short-option>
+      <long-option>license</long-option>
+      <description>Print license of AddTracer</description>
+    </definition>
+
+    <definition name="version">
+      <short-option>v</short-option>
+      <long-option>version</long-option>
+      <description>Print AddTracer version</description>
+    </definition>
+
+    <definition name="quiet">
+      <short-option>q</short-option>
+      <long-option>quiet</long-option>
+      <description>Quiet mode</description>
+    </definition>
+
+    <definition name="format">
+      <short-option>f</short-option>
+      <long-option>format</long-option>
+      <argument>REQUIRE</argument>
+      <argument-name>FORMAT</argument-name>
+      <value-separator>=</value-separator>
+      <description>Select tracer format. Available formats are: standard, simple and hex. Default is standard</description>
+    </definition>
+
+    <definition name="disable-arithmetic">
+      <short-option>O</short-option>
+      <long-option>disable-arithmetic</long-option>
+      <description>Do not inject the tracers for arithmetic instructions</description>
+    </definition>
+
+    <definition name="disable-constant">
+      <short-option>C</short-option>
+      <long-option>disable-constant</long-option>
+      <description>Do not inject tracers for pushing constants on operand stack</description>
+    </definition>
+
+    <definition name="disable-method">
+      <short-option>M</short-option>
+      <long-option>disable-method</long-option>
+      <description>Do not inject tracers for start and end of method</description>
+    </definition>
+
+    <definition name="disable-throw">
+      <short-option>T</short-option>
+      <long-option>disable-throw</long-option>
+      <description>Do not inject tracers for throw statements</description>
+    </definition>
+
+    <definition name="disable-local-variable">
+      <short-option>L</short-option>
+      <long-option>disable-local-variable</long-option>
+      <description>Do not inject tracers for local variable instructions</description>
+    </definition>
+
+    <definition name="disable-field-instruction">
+      <short-option>F</short-option>
+      <long-option>disable-field-instruction</long-option>
+      <description>Do not inject tracers for field instructions</description>
+    </definition>
+
+    <definition name="disable-array-instruction">
+      <short-option>A</short-option>
+      <long-option>disable-array-instruction</long-option>
+      <description>Do not inject tracers for array instructions</description>
+    </definition>
+
+    <definition name="disable-invoke-instruction">
+      <short-option>I</short-option>
+      <long-option>disable-invoke-instruction</long-option>
+      <description>Do not inject tracers for invoke instructions</description>
+    </definition>
+  </definitions>
+
+  <available-options>
+    <option>help</option>
+    <option>dest</option>
+    <option>format</option>
+    <option>quiet</option>
+    <option>license</option>
+    <option>version</option>
+    <option>disable-arithmetic</option>
+    <option>disable-constant</option>
+    <option>disable-method</option>
+    <option>disable-throw</option>
+    <option>disable-local-variable</option>
+    <option>disable-field-instruction</option>
+    <option>disable-array-instruction</option>
+    <option>disable-invoke-instruction</option>
+  </available-options>
+</command-line>

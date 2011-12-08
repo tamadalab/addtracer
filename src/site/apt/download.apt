@@ -1,0 +1,279 @@
+ ----
+ Download
+ ----
+ Haruaki TAMADA
+ ----
+ 2006-06-07
+ ----
+
+Download
+
+*Licence
+
+ Copyright 2003-2006 Haruaki Tamada
+
+ Licensed under the Apache License, Version 2.0 (the "License"); you
+may not use this file except in compliance with the License. You may
+obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing
+permissions and limitations under the License.
+
+*Requirements
+
+    * {{{http://java.sun.com/javase/}Java SE 5}} (Runtime platform)
+
+    * {{{http://maven.apache.org/}Apache Maven 2.x}} (Compilation)
+
+ []
+
+ Following libraries are required for executing AddTracer.
+
+    * {{{http://jakarta.apache.org/bcel/}Jakarta BCEL 5.1}}
+
+    * {{{http://jakarta.apache.org/commons/cli/}Jakarta Commons CLI 1.0}}
+
+    * {{{http://commons.cafebabe.jp/bcul/}BCUL}}
+
+    * {{{http://commons.cafebabe.jp/xmlcli/}XmlCli}}
+
+ []
+
+ Following libraries are required for executing AddTracer in other platform.
+
+    * {{{http://ant.apache.org/}Apache Ant 1.6.1}} (Running on Apache Ant platform)
+
+    * {{{http://donquixote.cafebabe.jp/rocinante/}Rocinante}} (Running on {{{http://donquixote.cafebabe.jp}DonQuixote}})
+
+ []
+
+ AddTracer does not support class file format of Java 5. 
+
+ Unfortunately, the BCEL which is library used in AddTracer has some
+bugs. So, injecting tracers would be failed when target class contains
+switch instruction. The patch of this page fixes this problem.
+
+*Changes
+
+ [version 2.1]
+   Java agent support.
+
+   Bug fixed: some option was ignored. option name was different between definition and usage.
+
+ [version 2.0]
+   Manage addtracer project with Maven2.
+
+   Separate useful libraries from this project ({{{http://commons.cafebabe.jp/xmlcli}xmlcli}}, 
+   {{{http://commons.cafebabe.jp/bcul/}bcul}})
+
+   Change package name from jp.ac.aist_nara.se.tama.tracer to jp.naist.se.addtracer.  And groupId of this product is ``jp.naist.se,'' and artifactId of addtracer is ``addtracer.''
+
+   Add new class and configuration file for using of {{{http://donquixote.cafebabe.jp/}DonQuixote plugin}}.
+
+   Rewrite web page of addtracer in apt format.
+
+ [version 1.10]
+    Enabled to inject tracer code to specified jar file at runtime and launch it.
+
+    Code refactoring.
+
+ [version 1.9]
+    Bug fixed. OR instruction name is not printed in all format
+
+    Bug fixed. Prefix is duplicated such as '0x0x' when printing assignment tarcer in beginnng of method (hex format)
+
+ [version 1.8]
+    Addition. Add hex format which enable to print numeric value in hex.
+
+ [version 1.7]
+    Bug fixed. AddTracer outputs invalid format class files when it inject tracers into two or more class files at one time. 
+
+*Download
+
+**Version 2.x Binary
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=2.1}addtracer-2.1.tar.gz}}]
+    md5sum: 
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=2.0}addtracer-2.0.tar.gz}}]
+    md5sum: 5c08c79458badb856fa68b45e7cb008b
+
+**Version 2.x Source
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=2.1-src}addtracer-2.1-src.tar.gz}}]
+    md5sum: 
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=2.0-src}addtracer-2.0-src.tar.gz}}]
+    md5sum: f073363afa8789b5f92180e169a89445
+
+**Version 1.x Binary
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.10}addtracer-1.10.tar.gz}}]
+    md5sum: da74b2b65b384d9a5ac731b8d6be54bc
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.9}addtracer-1.9.tar.gz}}]
+    md5sum: e333f118c4c58b7e153cce06a11eb87a
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.8}addtracer-1.8.tar.gz}}]
+    md5sum: 1a048773ee4aa510ad11f482eb7d0afe
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.7}addtracer-1.7.tar.gz}}]
+    md5sum: 5d754abfe7f2806e84269939e1b6f309
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.6}addtracer-1.6.tar.gz}}]
+    md5sum: 9b132472d39a4918f63011e9b0aa86ab
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.5}addtracer-1.5.tar.gz}}]
+    md5sum: 60bc67c6e9c795c13ea6534754c3464f
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.4}addtracer-1.4.tar.gz}}]
+    md5sum: 31d41b3de91cc82997c3272996f06ca4
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.3}addtracer-1.3.tar.gz}}]
+    md5sum: fec9e3b94118a9e56e12fcac2eca166b 
+
+**Version 1.x Source
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.10-src}addtracer-1.10.tar.gz}}]
+  md5sum: c44fef61e954acaae29fab44bb4666f0
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.9-src}addtracer-1.9.tar.gz}}]
+  md5sum: 832546e54bede8341294856dda7b669a
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.8-src}addtracer-1.8.tar.gz}}]
+  md5sum: e8795087c650381d9b8cd2b0f6de4fd3
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.7-src}addtracer-1.7.tar.gz}}]
+  md5sum: c5ad74175274019f1927b568b72fbbe5
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.6-src}addtracer-1.6.tar.gz}}]
+  md5sum: 10db30ba090e219617652ecb15bd6789
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.5-src}addtracer-1.5.tar.gz}}]
+  md5sum: e4355cb469648bd4fed2ba6031af3285
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.4-src}addtracer-1.4.tar.gz}}]
+  md5sum: 6a4f5c9bf99ea77e22b2e668f6c33059
+
+  [{{{../cgi-bin/jbirth/dl.cgi?product=addtracer&amp;version=1.3-src}addtracer-1.3.tar.gz}}]
+  md5sum: b1e365800cffcf673ce8aa864635d2fb
+
+Install
+
+*AddTracer version 2.x
+
+**Binary Install
+
+ AddTracer 2.x project is managed by {{{http://maven.apache.org/}Maven
+2}}.  So binary install is very easy.  Save following xml files as
+``pom.xml'' in a some directory with modifying content of version tag
+in dependencies tag.  The content of version tag in dependencies tag
+is the version number you want.
+
+----
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>jp.naist.se</groupId>
+  <artifactId>addtracer-installer</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+  <name>addtracer-installer</name>
+  <url>http://se.naist.jp/addtracer/</url>
+
+  <repositories>
+    <repository>
+      <id>maven.cafebabe.jp</id>
+      <name>cafebabe Maven2 Repository</name>
+      <url>http://cafebabe.jp/repository/maven2</url>
+    </repository>
+    <repository>
+      <id>se.naist.jp</id>
+      <name>Maven2 Repository of SE Lab., NAIST</name>
+      <url>http://se.naist.jp/maven2</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>jp.naist.se</groupId>
+      <artifactId>addtracer</artifactId>
+      <version>2.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>dependency-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+----
+
+ Then, simply type: 
+
+----
+$ mvn package
+----
+
+ Maven will get binary of addtracer and required libraries from
+Internet and copy them to ``target'' directory.
+
+**Build from source
+
+ If you build from source files, unpack archive, which is downloaded
+above link.  Next, change directory which named ``addtracer-2.X'' and
+simply type:
+
+----
+$ mvn package
+----
+
+ Then, maven will get required libraries and compile AddTracer.  The
+``target'' directory will contain the compiled class files (insides a
+classes directory) as well as a addtracer-2.X.jar file, where 2.X is
+the current version number.
+
+*AddTracer version 1.x
+
+ AddTracer runs on a variety of platform that have installed the Java
+Virtual Machine. Everything required to build AddTracer comes by
+executing Maven. However, you will need to install
+{{{http://maven.apache.org/}Maven}}, which is
+{{{http://www.apache.org/}Apache}} project and can be found here.
+
+ To make building AddTracer, first, unpack archive, which is
+downloaded above link. Next, change directory which named
+`addtracer-1.X' and simply type:
+
+----
+ $ maven jar
+----
+
+ Then, maven will get required libraries and compile AddTracer.  The
+``target'' directory will contain the compiled class files (insides a
+classes directory) as well as a addtracer-1.X.jar file, where 1.X is
+the current version number.
+

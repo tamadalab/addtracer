@@ -1,0 +1,274 @@
+ ----
+ Injecting Tracers into Java Class Files for Dynamic Analysis
+ ----
+ Haruaki TAMADA
+ ----
+ 2006-06-07
+ ----
+
+Overview
+
+ AddTracer is a tool to inject tracers (monitoring variable value and
+entering/exiting method) into specified Java class files.  Tracer code
+can be used for dynamic analysis of software products.  Therefore, we
+can use this tool for examining the property of tamper resistant.
+
+ AddTracer accepts Java class files as input, and outputs class files
+which are modified for tracers.
+
+ Since AddTracer extracts a enormous amount of dynamic information,
+extracted information should be filtered with variable name, method
+name, class name and etc.  Hence, AddTracer provides three tracer
+formats (simple, standard, and hex) and you can change the format.
+
+Usage
+
+ To run AddTracer, you must put required libraries on same directory
+of addtracer-X.X.jar. (If you compile from source files, Maven gets
+depend libraries from Internet and puts them on target directory.)
+
+ Also, addtracer-X.X.jar contains Main-Class manifest
+attribute. Therefore, it also runs as argument of -jar option of java
+command.
+
+*Statically Injection
+
+ Injects tracer code into class files which specified and/or contained
+in specified jar and/or zip file. Then, dump class files to
+destination (default is current directory) which contained tracer
+code.
+
+----
+usage: java -jar addtracer-X.X.jar [options...] <classes...|jars...>
+ -O,--disable-arithmetic          Do not inject the tracers for arithmetic
+                                  instructions
+ -C,--disable-constant            Do not inject tracers for pushing
+                                  constants on operand stack
+ -A,--disable-array-instruction   Do not inject tracers for array
+                                  instructions
+ -F,--disable-field-instruction   Do not inject tracers for field
+                                  instructions
+ -M,--disable-method              Do not inject tracers for start and end
+                                  of method
+ -T,--disable-throw               Do not inject tracers for throw
+                                  statements
+ -L,--disable-local-variable      Do not inject tracers for local variable
+                                  instructions
+ -d,--dest <DEST>                 Set destination directory
+ -f,--format <FORMAT>             Select tracer format. Available formats
+                                  are: standard, simple and hex. Default is standard
+ -q,--quiet                       Quiet mode
+ -V,--verbose                     Verbose mode
+ -h,--help                        Print this message
+ -l,--license                     Print license of AddTracer
+ -v,--version                     Print AddTracer version
+
+AddTracer version 2.0
+Copyright (C) 2003-2006 by Haruaki TAMADA
+----
+
+*{Java Agent}
+
+ Injects tracer code into class files while loading of class file.
+This feature is supported version 2.1 or later.
+
+----
+java -javaagent:addtracer-2.X.jar <plain invocation options...>
+----
+
+ Specifing options to java agent is such a following form.  Separate
+character of each option is `,' and separate character of option name
+and value is `@.'
+
+----
+java -javaagent:addtracer-2.X.jar=option1@value1|option2@value2|option3@value3 \
+  <plain invocation options...>
+----
+
+**Options
+
+ [pattern@<REGEX>]
+    Regular expression pattern which decide targets. Default value is null.
+
+ [disable-arithmetic]
+    Do not inject the tracers for arithmetic instructions
+ [disable-constant]
+    Do not inject tracers for pushing constants on operand stack
+
+ [disable-array-instruction]
+    Do not inject tracers for array instructions
+
+ [disable-field-instruction]
+    Do not inject tracers for field instructions
+
+ [disable-method]
+    Do not inject tracers for start and end of method
+
+ [disable-throw]
+    Do not inject tracers for throw statements
+
+ [disable-local-variable]
+    Do not inject tracers for local variable instructions
+
+ [format@<FORMAT>]
+    Select tracer format. Available formats are: standard, simple and
+    hex. Default is standard
+
+ [verbose]
+    Verbose mode
+
+*Apache Ant Task
+
+ AddTracer can be used in Apache Ant Task as following.
+
+----
+   <taskdef name="addtracer"
+            classname="jp.naist.se.ant.taskdefs.AddTracerTask"
+            classpathref="project.class.path"
+   />
+   <mkdir dir="${output.dir}" />
+   <addtracer destdir="${output.dir}"
+              basedir="${compiled.dir}">
+     <include name="**/*.class" />
+     <exclude name="**/*Test.class" />
+   </addtracer>
+----
+
+*---+---+---+
+| <<Attribute>> | <<Description>> | <<Required>> |
+*---+---+---+
+| baseDir   | The directory contained class files.  Default is project directory | No. |
+*---+---+---+
+| destDir   | Destination directory | Yes |
+*---+---+---+
+| lastModifiedCheck | Check last modified date. Default is true | No |
+*---+---+---+
+Attributes of addtracer task
+
+*Dynamically Injection
+
+ <This interface is obsolete.> If you want inject tracers
+dynamically, you can use {{Java Agent}} instead of this interface.
+
+ Injects tracer code into class files contained in specified jar
+file. Then, launch the class which injected tracer code and invoke
+main method.
+
+ Specified jar file must have Main-Class attribute in manifest file.
+
+----
+usage: java -jar runner.jar [options...] <jar [args]>
+ -O,--disable-arithmetic          Do not inject the tracers for arithmetic
+                                  instructions
+ -C,--disable-constant            Do not inject tracers for pushing
+                                  constants on operand stack
+ -A,--disable-array-instruction   Do not inject tracers for array
+                                  instructions
+ -F,--disable-field-instruction   Do not inject tracers for field
+                                  instructions
+ -M,--disable-method              Do not inject tracers for start and end
+                                  of method
+ -T,--disable-throw               Do not inject tracers for throw
+                                  statements
+ -L,--disable-local-variable      Do not inject tracers for local variable
+                                  instructions
+ -f,--format <FORMAT>             Select tracer format. Available formats
+                                  are: standard, simple and hex. Default is standard
+ -q,--quiet                       Quiet mode
+ -V,--verbose                     Verbose mode
+ -h,--help                        Print this message
+ -l,--license                     Print license of AddTracer
+ -v,--version                     Print AddTracer version
+
+AddTracer version 2.0
+Copyright (C) 2003-2006 by Haruaki TAMADA
+----
+
+*DonQuixote Plugins
+
+ AddTracer is supporting to run on
+{{{http://donquixote.cafebabe.jp}DonQuixote}}.  Put addtracer-X.X.jar
+file into DonQuixote plugins directory, then DonQuixote automatically
+finds and installs AddTracer.
+
+ A processor name of AddTracer in DonQuixote is ``tracer.''  Available
+property name is ``format,'' which value is allowed ``standard,''
+``simple,'' and ``hex.''  Default value is ``standard''.  If unknown
+value is specified, the value is regarded as ``standard.''
+
+
+Typical Scenario
+
+*Statically injection
+
+----
+$ ls
+HelloWorld.class    HelloWorld.java    addtracer-2.0
+$ cat HelloWorld.java
+public class HelloWorld{
+    public static void main(String[] args){
+        System.out.println("Hello World!");
+    }
+}
+$ java HelloWorld
+Hello World!
+$ java -jar addtracer-2.0/target/addtracer-2.0.jar -d dest HelloWorld.class
+$ ls
+dest HelloWorld.class    HelloWorld.java    addtracer-2.0
+$ ls dest
+HelloWorld.class
+$ java -classpath dest HelloWorld
+<!-- begin Method HelloWorld#main       // line 3 defined in - -->
+arg0[0-0]       *       assignment      // line 3
+arg0.length     0       assingment      // line 3
+java.lang.System#out<s> java.io.PrintStream@181afa3     reference       // line 3
+Hello World!
+<!-- end Method HelloWorld#main // - ending at line 4 -->
+----
+
+*Dynamically injection
+
+----
+$ ls
+HelloWorld.class    HelloWorld.java    manifest.mf    addtracer-2.0
+$ cat HelloWorld.java
+public class HelloWorld{
+    public static void main(String[] args){
+        System.out.println("Hello World!");
+    }
+}
+$ cat manifest.mf
+Main-Class: HelloWorld
+$ jar cfm hello.jar manifest.mf HelloWorld.class
+$ java -jar hello.jar
+Hello World!
+$ java -jar addtracer-2.0/targets/runner.jar hello.jar
+<!-- begin Method HelloWorld#main       // line 3 defined in - -->
+arg0[0-0]       *       assignment      // line 3
+arg0.length     0       assingment      // line 3
+java.lang.System#out<s> java.io.PrintStream@181afa3     reference       // line 3
+Hello World!
+<!-- end Method HelloWorld#main // - ending at line 4 -->
+----
+
+Related Publications
+
+ * Haruaki Tamada, Akito Monden, Masahide Nakamura, Ken-ichi Matsumoto, "Injecting Tracers into Java Class Files for Dynamic Analysis," In Proc. 46th Programming Symposium, pp. 51--62, Jan 2005 (In Japanese) [{{{http://se.naist.jp/~harua-t/publications/papers/tamada05prosym.pdf}Paper}}]
+
+ []
+
+Author Information
+
+ [Name] Haruaki TAMADA, Ph.D.
+
+ [Affiliation] Software Engineering Laboratory, Graduate School of Information Science, Nara Institute of Science and Technology 
+
+ [Address]     8916-5 Takayama, Ikoma, Nara, 630-0101, Japan 
+
+ [Telephone]   +81-743-72-5312
+
+ [Fax]         +81-743-72-5319
+
+ [E-mail]      harua-t__at__is.naist.jp
+
+ [Web Page]    http://se.naist.jp/~harua-t/ 
