@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.simple;
 
-/*
- * $Id: InsertIncrementInstructionUpdateHandler.java 89 2006-09-15 06:01:55Z harua-t $
- */
-
 import org.apache.bcel.generic.IINC;
 import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionHandle;
@@ -31,7 +27,6 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 89 $ $Date: 2006-09-15 15:01:55 +0900 (Fri, 15 Sep 2006) $
  */
 public class InsertIncrementInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     @Override

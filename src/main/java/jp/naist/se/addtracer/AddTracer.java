@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer;
 
-/*
- * $Id: AddTracer.java 139 2006-10-24 04:38:55Z harua-t $
- */
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,7 +49,6 @@ import org.xml.sax.SAXException;
  * </p>
  *
  * @author Haruaki TAMADA
- * @version $Revision: 139 $ $Date: 2006-10-24 13:38:55 +0900 (Tue, 24 Oct 2006) $
  */
 public class AddTracer{
     private BytecodeUpdater updater;

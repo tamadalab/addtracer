@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer;
 
-/*
- * $Id: BytecodeUpdaterFactory.java 117 2006-10-02 06:21:58Z harua-t $
- */
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +23,6 @@ import jp.cafebabe.commons.bcul.updater.BytecodeUpdater;
  * Factory class for AddTracer output format.
  *
  * @author Haruaki TAMADA
- * @version $Revision: 117 $ $Date: 2006-10-02 15:21:58 +0900 (Mon, 02 Oct 2006) $
  */
 public class BytecodeUpdaterFactory{
     /**

@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.hex;
 
-/*
- * $Id: ArithmeticInstructionUpdateHandler.java 111 2006-09-19 12:10:31Z harua-t $
- */
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ArithmeticInstruction;
 import org.apache.bcel.generic.DUP2_X1;
@@ -35,7 +31,6 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 111 $ $Date: 2006-09-19 21:10:31 +0900 (Tue, 19 Sep 2006) $
  */
 public class ArithmeticInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     @Override

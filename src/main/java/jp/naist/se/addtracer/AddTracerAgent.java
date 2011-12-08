@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer;
 
-/*
- * $Id: AddTracer.java 110 2006-09-19 12:10:06Z harua-t $
- */
-
 import java.lang.instrument.Instrumentation;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +24,6 @@ import org.apache.bcel.Repository;
 
 /**
  * @author Haruaki TAMADA
- * @version $Revision$ $Date$
  */
 public class AddTracerAgent{
     /**

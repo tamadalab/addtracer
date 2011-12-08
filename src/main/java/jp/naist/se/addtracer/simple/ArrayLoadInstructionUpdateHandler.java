@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.simple;
 
-/*
- * $Id: ArrayLoadInstructionUpdateHandler.java 89 2006-09-15 06:01:55Z harua-t $
- */
-
 import org.apache.bcel.generic.ArrayInstruction;
 import org.apache.bcel.generic.DUP2;
 import org.apache.bcel.generic.DUP2_X1;
@@ -37,7 +33,6 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 89 $ $Date: 2006-09-15 15:01:55 +0900 (Fri, 15 Sep 2006) $
  */
 public class ArrayLoadInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     @Override

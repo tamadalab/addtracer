@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer;
 
-/*
- * $Id: TracerInstructionUpdateHandler.java 117 2006-10-02 06:21:58Z harua-t $
- */
-
 import jp.cafebabe.commons.bcul.updater.AbstractInstructionUpdateHandler;
 import jp.cafebabe.commons.bcul.updater.InstructionUpdateHandler;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
@@ -41,7 +37,6 @@ import org.apache.bcel.generic.Type;
  * </p>
  *
  * @author Haruaki TAMADA
- * @version $Revision: 117 $ $Date: 2006-10-02 15:21:58 +0900 (Mon, 02 Oct 2006) $
  */
 public abstract class TracerInstructionUpdateHandler extends AbstractInstructionUpdateHandler implements InstructionUpdateHandler{
     public static final String STRINGBUFFER = "java.lang.StringBuffer";

@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer;
 
-/*
- * $Id: UpdateHandlerFactory.java 86 2006-09-15 04:51:51Z harua-t $
- */
-
 import java.util.Iterator;
 
 import jp.cafebabe.commons.bcul.updater.InstructionUpdateHandler;
@@ -25,7 +21,6 @@ import jp.cafebabe.commons.bcul.updater.InstructionUpdateHandler;
 /**
  *
  * @author Haruaki TAMADA
- * @version $Revision: 86 $ $Date: 2006-09-15 13:51:51 +0900 (Fri, 15 Sep 2006) $
  */
 public interface UpdateHandlerFactory{
     public void reset();

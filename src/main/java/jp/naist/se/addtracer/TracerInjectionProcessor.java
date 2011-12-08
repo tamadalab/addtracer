@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer;
 
-/*
- * $Id: TracerInjectionProcessor.java 117 2006-10-02 06:21:58Z harua-t $
- */
-
 import java.io.PrintWriter;
 import java.net.URL;
 
@@ -54,7 +50,6 @@ import org.apache.bcel.classfile.JavaClass;
  * </table>
  *
  * @author Haruaki TAMADA
- * @version $Revision: 117 $ $Date: 2006-10-02 15:21:58 +0900 (Mon, 02 Oct 2006) $
  */
 public class TracerInjectionProcessor extends FilterBytecodeProcessor{
     /**

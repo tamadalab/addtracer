@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.common;
 
-/*
- * $Id: ReturnInstructionUpdateHandler.java 111 2006-09-19 12:10:31Z harua-t $
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +31,6 @@ import org.apache.bcel.generic.Select;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 111 $ $Date: 2006-09-19 21:10:31 +0900 (Tue, 19 Sep 2006) $
  */
 public abstract class ReturnInstructionUpdateHandler extends TracerInstructionUpdateHandler implements PostProcessRequired{
     /**
