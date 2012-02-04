@@ -42,6 +42,7 @@ public class BytecodeUpdaterFactory{
         formatSet.add("simple");
         formatSet.add("hex");
         formatSet.add("std");
+        formatSet.add("standard");
     }
 
     /**
@@ -70,7 +71,7 @@ public class BytecodeUpdaterFactory{
      */
     public BytecodeUpdater getUpdater(String type){
         if(type == null || !formatSet.contains(type.toLowerCase())){
-            type = "std";
+            type = "standard";
         }
 
         return new TracerBytecodeUpdater(type);
