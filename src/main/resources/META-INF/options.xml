@@ -43,7 +43,7 @@
       <argument>REQUIRE</argument>
       <argument-name>FORMAT</argument-name>
       <value-separator>=</value-separator>
-      <description>Select tracer format. Available formats are: standard, simple and hex. Default is standard</description>
+      <description>Select tracer format. Available formats are: std, standard, simple and hex. Default is standard</description>
     </definition>
 
     <definition name="disable-arithmetic">
