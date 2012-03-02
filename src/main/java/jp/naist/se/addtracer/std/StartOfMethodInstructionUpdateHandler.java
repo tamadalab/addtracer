@@ -175,18 +175,18 @@ public class StartOfMethodInstructionUpdateHandler extends TracerInstructionUpda
         String tracer = value + "[0-";
 
         list.append(pushSystemOutAndStringBuffer(d, tracer));
-        list.append(new ALOAD(0));
+        list.append(new ALOAD(index));
         list.append(new ARRAYLENGTH());
         list.append(d.getFactory().createInvoke(STRINGBUFFER, "append", Type.STRINGBUFFER,
                                                 new Type[] { Type.INT, }, Constants.INVOKEVIRTUAL));
         list.append(getToStringAndPrintln(d, "]\t*\tassignment\t// line " + line));
 
         list.append(pushSystemOutAndStringBuffer(d, value + ".length\t"));
-        list.append(new ALOAD(0));
+        list.append(new ALOAD(index));
         list.append(new ARRAYLENGTH());
         list.append(d.getFactory().createInvoke(STRINGBUFFER, "append", Type.STRINGBUFFER,
                                                 new Type[] { Type.INT, }, Constants.INVOKEVIRTUAL));
-        list.append(getToStringAndPrintln(d, "\tassingment\t// line " + line));
+        list.append(getToStringAndPrintln(d, "\tassignment\t// line " + line));
 
         return list;
     }

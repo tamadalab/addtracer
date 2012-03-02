@@ -29,9 +29,10 @@ import java.util.zip.ZipFile;
 
 import jp.cafebabe.commons.bcul.RepositoryWrapper;
 import jp.cafebabe.commons.bcul.updater.BytecodeUpdater;
-import jp.cafebabe.commons.xmlcli.CommandLinePlus;
-import jp.cafebabe.commons.xmlcli.OptionsBuilder;
-import jp.cafebabe.commons.xmlcli.builder.OptionsBuilderFactory;
+import jp.sourceforge.talisman.xmlcli.CommandLinePlus;
+import jp.sourceforge.talisman.xmlcli.OptionsBuilder;
+import jp.sourceforge.talisman.xmlcli.XmlCliConfigurationException;
+import jp.sourceforge.talisman.xmlcli.builder.OptionsBuilderFactory;
 
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.ClassParser;
@@ -198,8 +199,8 @@ public class AddTracer{
     }
 
     private static void printVersion(){
-        System.out.println("AddTracer version 2.2");
-        System.out.println("Copyright (C) 2003-2006 by Haruaki TAMADA");
+        System.out.println("AddTracer version 2.1");
+        System.out.println("Copyright (C) 2003-2011 by Haruaki TAMADA");
     }
 
     private static void printLicense() throws IOException{
@@ -215,7 +216,7 @@ public class AddTracer{
         in.close();
     }
 
-    private static Options buildOptions() throws IOException, SAXException{
+    private static Options buildOptions() throws IOException, SAXException, XmlCliConfigurationException{
         OptionsBuilderFactory factory = OptionsBuilderFactory.getInstance();
         URL url = AddTracer.class.getResource(
             "/META-INF/options.xml"

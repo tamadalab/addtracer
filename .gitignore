@@ -3,3 +3,4 @@
 .project
 .djunitplugin.ser
 target
+*.class

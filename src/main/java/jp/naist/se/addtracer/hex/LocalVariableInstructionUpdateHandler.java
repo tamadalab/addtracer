@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.hex;
 
-/*
- * $Id: LocalVariableInstructionUpdateHandler.java 89 2006-09-15 06:01:55Z harua-t $
- */
-
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;

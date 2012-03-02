@@ -9,31 +9,39 @@
   <version>2.1-SNAPSHOT</version>
   <name>AddTracer</name>
   <url>http://se.naist.jp/addtracer/</url>
+  <inceptionYear>2003</inceptionYear>
 
   <issueManagement>
-  	<system>Redmine</system>
-  	<url>http://diamond.cse.kyoto-su.ac.jp/redmine/projects/addtracer</url>
+    <system>Redmine</system>
+    <url>http://diamond.cse.kyoto-su.ac.jp/redmine/projects/addtracer</url>
   </issueManagement>
+
   <ciManagement>
-  	<system>Jenkins</system>
+    <system>Jenkins</system>
   </ciManagement>
-  <inceptionYear>2003</inceptionYear>
 
   <repositories>
     <repository>
-      <id>maven.cafebabe.jp</id>
-      <name>The cafebabe Maven2 Repository</name>
-      <url>http://cafebabe.jp/repository/maven2</url>
+      <id>stigmata.sourceforge.jp</id>
+      <name>Stigmata Maven2 Repository in sourceforge.jp</name>
+      <url>http://stigmata.sourceforge.jp/maven2</url>
     </repository>
   </repositories>
 
+  <distributionManagement>
+    <repository>
+      <id>shell.sourceforge.jp</id>
+      <url>scp://tama3@shell.sourceforge.jp/home/groups/s/st/stigmata/htdocs/maven2</url>
+    </repository>
+  </distributionManagement>
+
   <developers>
     <developer>
-      <id>tama</id>
+      <id>tamada</id>
       <name>Haruaki TAMADA</name>
-      <email>harua-t[ at ]is.naist.jp</email>
-      <organization>NAIST SE Lab.</organization>
-      <organizationUrl>http://se.naist.jp/</organizationUrl>
+      <email>tamada[ at ]cc.kyoto-su.acjp</email>
+      <organization>Kyoto Sangyo University</organization>
+      <organizationUrl>http://www.cc.kyoto-su.ac.jp/~tamada/</organizationUrl>
       <timezone>-9</timezone>
     </developer>
   </developers>
@@ -54,28 +62,10 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>commons-cli</groupId>
-      <artifactId>commons-cli</artifactId>
-      <version>1.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>jp.cafebabe.commons</groupId>
+      <groupId>jp.sourceforge.talisman</groupId>
       <artifactId>xmlcli</artifactId>
-      <version>1.0</version>
+      <version>1.2.3</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>jp.cafebabe.commons</groupId>
-      <artifactId>bcul</artifactId>
-      <version>1.0</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>jp.cafebabe.donquixote</groupId>
-      <artifactId>rocinante</artifactId>
-      <version>1.0</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>ant</groupId>
@@ -88,6 +78,13 @@
       <artifactId>junit</artifactId>
       <version>4.10</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>4.0</version>
+      <type>jar</type>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 
@@ -176,6 +173,14 @@
         </configuration>
       </plugin>
     </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>1.0-beta-6</version>
+      </extension>
+    </extensions>
   </build>
 
   <reporting>
