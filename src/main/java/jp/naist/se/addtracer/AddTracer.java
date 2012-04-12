@@ -234,14 +234,14 @@ public class AddTracer{
     }
 
     private static void setDisables(AddTracer tracer, CommandLinePlus line){
-        if(line.hasOption("disable-arithmetic"))        tracer.setArithmeticInstruction(false);
-        if(line.hasOption("disable-constant"))          tracer.setConstant(false);
-        if(line.hasOption("disable-method"))            tracer.setMethod(false);
-        if(line.hasOption("disable-throw"))             tracer.setThrow(false);
-        if(line.hasOption("disable-local-variable"))    tracer.setLocalVariables(false);
-        if(line.hasOption("disable-field-instruction")) tracer.setFieldInstruction(false);
-        if(line.hasOption("disable-array-instruction")) tracer.setArray(false);
-        if(line.hasOption("disable-invoke-instruction")) tracer.setArray(false);
+        if(line.hasOption("disable-arithmetic"))         tracer.setArithmeticInstruction(false);
+        if(line.hasOption("disable-constant"))           tracer.setConstant(false);
+        if(line.hasOption("disable-method"))             tracer.setMethod(false);
+        if(line.hasOption("disable-throw"))              tracer.setThrow(false);
+        if(line.hasOption("disable-local-variable"))     tracer.setLocalVariables(false);
+        if(line.hasOption("disable-field-instruction"))  tracer.setFieldInstruction(false);
+        if(line.hasOption("disable-array-instruction"))  tracer.setArray(false);
+        if(line.hasOption("disable-invoke-instruction")) tracer.setInvokeInstruction(false);
     }
 
     public static void main(String[] args) throws Exception{

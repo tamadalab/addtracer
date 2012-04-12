@@ -120,7 +120,7 @@ public class AddTracer2{
 
     private static void printVersion(){
         System.out.println("AddTracer version 2.1");
-        System.out.println("Copyright (C) 2003-2011 by Haruaki TAMADA");
+        System.out.println("Copyright (C) 2003-2012 by Haruaki TAMADA");
     }
 
     private static void printLicense() throws IOException{
