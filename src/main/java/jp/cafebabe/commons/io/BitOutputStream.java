@@ -84,7 +84,7 @@ public class BitOutputStream extends FilterOutputStream{
     }
 
     /**
-     * @deprecated instead of {@link wirte(boolean) <code>write(boolean)</code>}
+     * @deprecated instead of {@link #write(boolean) <code>write(boolean)</code>}
      */
     public void writeBit(int bits) throws IOException{
         write(bits == 1);

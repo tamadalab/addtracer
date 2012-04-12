@@ -40,31 +40,26 @@ code.
 
 ----
 usage: java -jar addtracer-X.X.jar [options...] <classes...|jars...>
- -O,--disable-arithmetic          Do not inject the tracers for arithmetic
-                                  instructions
- -C,--disable-constant            Do not inject tracers for pushing
-                                  constants on operand stack
- -A,--disable-array-instruction   Do not inject tracers for array
-                                  instructions
- -F,--disable-field-instruction   Do not inject tracers for field
-                                  instructions
- -M,--disable-method              Do not inject tracers for start and end
-                                  of method
- -T,--disable-throw               Do not inject tracers for throw
-                                  statements
- -L,--disable-local-variable      Do not inject tracers for local variable
-                                  instructions
- -d,--dest <DEST>                 Set destination directory
- -f,--format <FORMAT>             Select tracer format. Available formats
-                                  are: standard, simple and hex. Default is standard
+ -O,--disable-arithmetic          Do not inject the tracers for arithmetic instructions
+ -C,--disable-constant            Do not inject tracers for pushing constants on operand stack
+ -A,--disable-array-instruction   Do not inject tracers for array instructions
+ -F,--disable-field-instruction   Do not inject tracers for field instructions
+ -M,--disable-method              Do not inject tracers for start and end of method
+ -T,--disable-throw               Do not inject tracers for throw statements
+ -L,--disable-local-variable      Do not inject tracers for local variable instructions
+
  -q,--quiet                       Quiet mode
  -V,--verbose                     Verbose mode
+ -d,--dest <DEST>                 Set destination directory
+ -f,--format <FORMAT>             Select tracer format. Available formats are:
+                                  standard, simple and hex. Default is standard
+
  -h,--help                        Print this message
  -l,--license                     Print license of AddTracer
  -v,--version                     Print AddTracer version
 
-AddTracer version 2.0
-Copyright (C) 2003-2006 by Haruaki TAMADA
+AddTracer version 2.2
+Copyright (C) 2003-2012 by Haruaki TAMADA
 ----
 
 *{Java Agent}
@@ -186,10 +181,10 @@ Copyright (C) 2003-2006 by Haruaki TAMADA
 
 *DonQuixote Plugins
 
- AddTracer is supporting to run on
-{{{http://donquixote.cafebabe.jp}DonQuixote}}.  Put addtracer-X.X.jar
-file into DonQuixote plugins directory, then DonQuixote automatically
-finds and installs AddTracer.
+ <This interface is obsolete.> AddTracer is supporting to run on
+ {{{http://donquixote.cafebabe.jp}DonQuixote}}.  Put addtracer-X.X.jar
+ file into DonQuixote plugins directory, then DonQuixote automatically
+ finds and installs AddTracer.
 
  A processor name of AddTracer in DonQuixote is ``tracer.''  Available
 property name is ``format,'' which value is allowed ``standard,''
@@ -220,7 +215,7 @@ HelloWorld.class
 $ java -classpath dest HelloWorld
 <!-- begin Method HelloWorld#main       // line 3 defined in - -->
 arg0[0-0]       *       assignment      // line 3
-arg0.length     0       assingment      // line 3
+arg0.length     0       assignment      // line 3
 java.lang.System#out<s> java.io.PrintStream@181afa3     reference       // line 3
 Hello World!
 <!-- end Method HelloWorld#main // - ending at line 4 -->
@@ -245,7 +240,7 @@ Hello World!
 $ java -jar addtracer-2.0/targets/runner.jar hello.jar
 <!-- begin Method HelloWorld#main       // line 3 defined in - -->
 arg0[0-0]       *       assignment      // line 3
-arg0.length     0       assingment      // line 3
+arg0.length     0       assignment      // line 3
 java.lang.System#out<s> java.io.PrintStream@181afa3     reference       // line 3
 Hello World!
 <!-- end Method HelloWorld#main // - ending at line 4 -->
@@ -261,14 +256,14 @@ Author Information
 
  [Name] Haruaki TAMADA, Ph.D.
 
- [Affiliation] Software Engineering Laboratory, Graduate School of Information Science, Nara Institute of Science and Technology 
+ [Affiliation] Faculty of Computer Science and Engineering, Kyoto Sangyo University.
 
- [Address]     8916-5 Takayama, Ikoma, Nara, 630-0101, Japan 
+ [Address]     603-8555, Motoyama, Kamigamo, Kita-ku, Kyoto-shi, Kyoto, Japan.
 
- [Telephone]   +81-743-72-5312
+ [Telephone]   +81-75-705-1989
 
- [Fax]         +81-743-72-5319
+ [Fax]         +81-75-705-1914
 
- [E-mail]      harua-t__at__is.naist.jp
+ [E-mail]      tamada__at__cse.kyoto-su.ac.jp
 
- [Web Page]    http://se.naist.jp/~harua-t/ 
+ [Web Page]    http://www.cc.kyoto-su.ac.jp/~tamada

@@ -15,15 +15,13 @@
     <menu name="AddTracer">
       <item name="Introduction"        href="index.html"/>
       <item name="Download"            href="download.html"/>
-      <item name="License"             href="license.html"/>
     </menu>
 
     <menu name="Links">
       <item name="SE Lab., NAIST"      href="http://se.naist.jp/" />
-      <item name="DonQuixote"          href="http://donquixote.cafebabe.jp/" />
     </menu>
 
-    ${reports}
+    <menu ref="reports" />
 
   </body>
 </project>

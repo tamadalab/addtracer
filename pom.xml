@@ -96,7 +96,6 @@
   <scm>
     <connection>scm:git:git://diamond.cse.kyoto-su.ac.jp:/addtracer.git</connection>
     <developerConnection>scm:git:git@diamond.cse.kyoto-su.ac.jp:/addtracer.git</developerConnection>
-    <url>http://tun.naist.jp/svn/addtracer/</url>
   </scm>
 
   <build>

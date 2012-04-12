@@ -60,10 +60,17 @@ switch instruction. The patch of this page fixes this problem.
 
 *Changes
 
+ [version 2.2]
+   Bug fixed: fix typo. assingment -&amp; assignment
+
+   Bug fixed: verify error on addtracing getfield and putfield instructions.
+
+   Bug fixed: some option was ignored and option names were invalid.
+
  [version 2.1]
    Java agent support.
 
-   Bug fixed: some option was ignored. option name was different between definition and usage.
+   Includes tamada's legacy libraries in source tree.
 
  [version 2.0]
    Manage addtracer project with Maven2.
