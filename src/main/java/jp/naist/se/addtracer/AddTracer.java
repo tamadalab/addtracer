@@ -199,8 +199,9 @@ public class AddTracer{
     }
 
     private static void printVersion(){
-        System.out.println("AddTracer version 2.1");
-        System.out.println("Copyright (C) 2003-2011 by Haruaki TAMADA");
+        Package packageObject = AddTracer.class.getPackage();
+        System.out.println("AddTracer version " + packageObject.getImplementationVersion());
+        System.out.println("Copyright (C) 2003-2012 by Haruaki TAMADA");
     }
 
     private static void printLicense() throws IOException{

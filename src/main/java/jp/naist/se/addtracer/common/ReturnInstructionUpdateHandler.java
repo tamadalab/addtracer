@@ -34,8 +34,8 @@ import org.apache.bcel.generic.Select;
  */
 public abstract class ReturnInstructionUpdateHandler extends TracerInstructionUpdateHandler implements PostProcessRequired{
     /**
-     * return $B$KD>@\Ht$s$G$$$k(B BranchInstruction $B$r(B
-     * return $B$NA0$N%H%l!<%5$KHt$V$h$&$KJQ99$9$k!%(B
+     * return に直接飛んでいる BranchInstruction を
+     * return の前のトレーサに飛ぶように変更する．
      */
     protected InstructionList updateBranchTarget(InstructionList list){
         InstructionHandle[] handles = list.getInstructionHandles();
@@ -56,7 +56,7 @@ public abstract class ReturnInstructionUpdateHandler extends TracerInstructionUp
                     };
                 }
 
-                // RETURN $B$NA0$N(B GETSTATIC $B$rC5$7!$$=$3$K(B target $B$rCV$/!%(B
+                // RETURN の前の GETSTATIC を探し，そこに target を置く．
                 for(int j = 0; j < targets.length; j++){
                     Instruction ii = targets[j].getInstruction();
                     InstructionHandle handle = targets[j];

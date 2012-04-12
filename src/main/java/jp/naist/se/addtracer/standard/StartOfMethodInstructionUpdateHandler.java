@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: StartOfMethodInstructionUpdateHandler.java,v 1.5 2005/11/21 11:40:47 kenjiro Exp $
- */
-
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
@@ -44,7 +40,6 @@ import org.apache.bcel.generic.Type;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.5 $ $Date: 2005/11/21 11:40:47 $
  */
 public class StartOfMethodInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     private boolean firstStaticInitializer = true;
@@ -71,7 +66,7 @@ public class StartOfMethodInstructionUpdateHandler extends TracerInstructionUpda
         );
 
         if(d.getMethodName().equals("<clinit>")){
-            // ∫£§ﬁ§« static •§•À•∑•„•È•§•∂§¨§ §±§Ï§–
+            // ‰ªä„Åæ„Åß static „Ç§„Éã„Ç∑„É£„É©„Ç§„Ç∂„Åå„Å™„Åë„Çå„Å∞
             if(firstStaticInitializer){
                 list.append(getDeclarationTracer(d, true));
                 firstStaticInitializer = false;
@@ -166,8 +161,7 @@ public class StartOfMethodInstructionUpdateHandler extends TracerInstructionUpda
                 if(!(type.equals(Type.BOOLEAN) || type.equals(Type.INT) ||
                      type.equals(Type.BYTE)    || type.equals(Type.SHORT) ||
                      type.equals(Type.FLOAT)   || type.equals(Type.CHAR)  ||
-                     type.equals(Type.DOUBLE)  || type.equals(Type.LONG)  ||
-                     type.equals(Type.STRING))){
+                     type.equals(Type.DOUBLE)  || type.equals(Type.LONG))){
 
                     list.append(data.getFactory().createInvoke(
                         "java.lang.System", "identityHashCode", Type.INT,
@@ -212,7 +206,7 @@ public class StartOfMethodInstructionUpdateHandler extends TracerInstructionUpda
         list.append(new ARRAYLENGTH());
         list.append(d.getFactory().createInvoke(STRINGBUFFER, "append", Type.STRINGBUFFER,
                                                 new Type[] { Type.INT, }, Constants.INVOKEVIRTUAL));
-        list.append(getToStringAndPrintln(d, "\tassingment\t// line " + line));
+        list.append(getToStringAndPrintln(d, "\tassignment\t// line " + line));
 
         return list;
     }

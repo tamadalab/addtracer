@@ -218,7 +218,7 @@ public class StartOfMethodInstructionUpdateHandler extends TracerInstructionUpda
         list.append(new ARRAYLENGTH());
         list.append(d.getFactory().createInvoke(STRINGBUFFER, "append", Type.STRINGBUFFER,
                                                 new Type[] { Type.INT, }, Constants.INVOKEVIRTUAL));
-        list.append(getToStringAndPrintln(d, "\tassingment\t// line " + line));
+        list.append(getToStringAndPrintln(d, "\tassignment\t// line " + line));
 
         return list;
     }

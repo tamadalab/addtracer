@@ -112,11 +112,15 @@
         <version>2.3.1</version>
         <configuration>
           <archive>
-            <manifestFile>${basedir}/src/main/resources/META-INF/MANIFEST.MF</manifestFile>
             <manifest>
               <mainClass>jp.naist.se.addtracer.AddTracer</mainClass>
               <addClasspath>true</addClasspath>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
+            <manifestEntries>
+              <Premain-Class>jp.naist.se.addtracer.AddTracerAgent</Premain-Class>
+              <Boot-Class-Path>bcel-5.2.jar</Boot-Class-Path>
+            </manifestEntries>
           </archive>
         </configuration>
       </plugin>

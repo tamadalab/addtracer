@@ -44,13 +44,14 @@ public class AddTracerAgent{
     private AddTracer initializeAddTracer(Map<String, String> options){
         AddTracer addTracer = new AddTracer(options.get("format"), options.containsKey("verbose"));
 
-        if(options.containsKey("disable-arithmetic"))           addTracer.setArithmeticInstruction(false);
-        if(options.containsKey("disable-constant"))             addTracer.setConstant(false);
-        if(options.containsKey("disable-method"))               addTracer.setMethod(false);
-        if(options.containsKey("disable-throws"))               addTracer.setThrow(false);
-        if(options.containsKey("disable-local-variable"))       addTracer.setLocalVariables(false);
-        if(options.containsKey("disable-field-instructuction")) addTracer.setFieldInstruction(false);
-        if(options.containsKey("disable-array-instructuction")) addTracer.setArray(false);
+        if(options.containsKey("disable-arithmetic"))            addTracer.setArithmeticInstruction(false);
+        if(options.containsKey("disable-constant"))              addTracer.setConstant(false);
+        if(options.containsKey("disable-method"))                addTracer.setMethod(false);
+        if(options.containsKey("disable-throws"))                addTracer.setThrow(false);
+        if(options.containsKey("disable-local-variable"))        addTracer.setLocalVariables(false);
+        if(options.containsKey("disable-field-instructuction"))  addTracer.setFieldInstruction(false);
+        if(options.containsKey("disable-array-instructuction"))  addTracer.setArray(false);
+        if(options.containsKey("disable-invoke-instructuction")) addTracer.setInvokeInstruction(false);
 
         return addTracer;
     }

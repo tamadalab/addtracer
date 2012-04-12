@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: ConstantPushInstructionUpdateHandler.java,v 1.2 2005/07/25 07:33:06 harua-t Exp $
- */
-
 import org.apache.bcel.generic.ConstantPushInstruction;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
@@ -30,7 +26,6 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.2 $ $Date: 2005/07/25 07:33:06 $
  */
 public class ConstantPushInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     public boolean isTarget(InstructionHandle i, UpdateData data){

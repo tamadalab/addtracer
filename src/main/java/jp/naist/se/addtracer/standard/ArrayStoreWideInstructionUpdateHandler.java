@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: ArrayStoreWideInstructionUpdateHandler.java,v 1.3 2005/07/25 09:19:48 harua-t Exp $
- */
-
 import jp.cafebabe.commons.bcul.SWAP2;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 
@@ -38,7 +34,6 @@ import org.apache.bcel.generic.Type;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.3 $ $Date: 2005/07/25 09:19:48 $
  */
 public class ArrayStoreWideInstructionUpdateHandler extends ArrayStoreInstructionUpdateHandler{
     public boolean isTarget(InstructionHandle ih, UpdateData data){

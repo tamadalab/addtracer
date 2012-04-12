@@ -132,7 +132,7 @@ public class ArrayCopyInstructionUpdateHandler extends TracerInstructionUpdateHa
     }
 
     /**
-     * $(D=y(Bg[T}D
+     * 悤g[T}D
      * <blockquote><pre>
      *     System.out.println(src + "[" + srcPos + "-" + (srcPos + length) +
      *                        "]\t*\treference\t//line " + lineNumber);

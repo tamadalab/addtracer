@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: ArrayCopyInstructionUpdateHandler.java,v 1.1 2005/07/25 06:30:06 harua-t Exp $
- */
-
 import jp.cafebabe.commons.bcul.updater.MethodCreatable;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
@@ -42,7 +38,6 @@ import org.apache.bcel.generic.Type;
  * 
  *
  * @author Haruaki TAMADA
- * @version $Revision: 1.1 $ $Date: 2005/07/25 06:30:06 $
  */
 public class ArrayCopyInstructionUpdateHandler extends TracerInstructionUpdateHandler implements MethodCreatable{
     private Method arraycopy = null;
@@ -94,7 +89,7 @@ public class ArrayCopyInstructionUpdateHandler extends TracerInstructionUpdateHa
     }
 
     /**
-     * System#arraycopy ¥á¥½¥Ã¥É¤ò°Ê²¼¤ÎÌ¿Îá¤ËÃÖ¤­´¹¤¨¤ë¡¥
+     * System#arraycopy ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä»¥ä¸‹ã®å‘½ä»¤ã«ç½®ãæ›ãˆã‚‹ï¼
      * <blockquote><pre>
      *     System.out.println(src + "[" + srcPos + "-" + (srcPos + length) +
      *                        "]\t*\treference\t//line " + lineNumber);
@@ -134,7 +129,7 @@ public class ArrayCopyInstructionUpdateHandler extends TracerInstructionUpdateHa
     }
 
     /**
-     * °Ê²¼¤Î¤è¤¦¤Ê¥È¥ì¡¼¥µ¤òÁŞÆş¤¹¤ë¡¥
+     * ä»¥ä¸‹ã®ã‚ˆã†ãªãƒˆãƒ¬ãƒ¼ã‚µã‚’æŒ¿å…¥ã™ã‚‹ï¼
      * <blockquote><pre>
      *     System.out.println(src + "[" + srcPos + "-" + (srcPos + length) +
      *                        "]\t*\treference\t//line " + lineNumber);

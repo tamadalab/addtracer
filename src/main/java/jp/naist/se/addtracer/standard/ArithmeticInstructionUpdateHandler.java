@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: ArithmeticInstructionUpdateHandler.java,v 1.4 2005/08/22 05:37:14 harua-t Exp $
- */
-
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ArithmeticInstruction;
 import org.apache.bcel.generic.DUP2_X1;
@@ -35,7 +31,6 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.4 $ $Date: 2005/08/22 05:37:14 $
  */
 public class ArithmeticInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     public boolean isTarget(InstructionHandle i, UpdateData data){
@@ -49,18 +44,18 @@ public class ArithmeticInstructionUpdateHandler extends TracerInstructionUpdateH
         String name = i.getClass().getName().toLowerCase();
         name = name.substring(name.lastIndexOf(".") + 1);
 
-        if(name.indexOf("add") > 0)       operand = "+";   // Â­¤·»»
-        else if(name.indexOf("sub")  > 0) operand = "-";   // °ú¤­»»
-        else if(name.indexOf("mul")  > 0) operand = "*";   // ³İ¤±»»
-        else if(name.indexOf("div")  > 0) operand = "/";   // ³ä¤ê»»
-        else if(name.indexOf("rem")  > 0) operand = "%";   // ¾êÍ¾
+        if(name.indexOf("add") > 0)       operand = "+";   // è¶³ã—ç®—
+        else if(name.indexOf("sub")  > 0) operand = "-";   // å¼•ãç®—
+        else if(name.indexOf("mul")  > 0) operand = "*";   // æ›ã‘ç®—
+        else if(name.indexOf("div")  > 0) operand = "/";   // å‰²ã‚Šç®—
+        else if(name.indexOf("rem")  > 0) operand = "%";   // å‰°ä½™
         else if(name.indexOf("and")  > 0) operand = "&";   // and
         else if(name.indexOf("xor")  > 0) operand = "^";   // xor
         else if(name.indexOf("or")   > 0) operand = "|";   // or
         else if(name.indexOf("ushr") > 0) operand = ">>>"; // >>>
         else if(name.indexOf("shr")  > 0) operand = ">>";  // >>
         else if(name.indexOf("shl")  > 0) operand = "<<";  // <<
-        else if(name.indexOf("neg")  > 0) operand = "~";   // Éä¹æÈ¿Å¾
+        else if(name.indexOf("neg")  > 0) operand = "~";   // ç¬¦å·åè»¢
         else                              operand = name;
 
         Type type = i.getType(d.getConstantPoolGen());

@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: ReturnInstructionUpdateHandler.java,v 1.1 2005/07/25 06:30:06 harua-t Exp $
- */
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -37,7 +33,6 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.1 $ $Date: 2005/07/25 06:30:06 $
  */
 public class ReturnInstructionUpdateHandler extends TracerInstructionUpdateHandler implements PostProcessRequired{
     public boolean isTarget(InstructionHandle ih, UpdateData data){
@@ -61,8 +56,8 @@ public class ReturnInstructionUpdateHandler extends TracerInstructionUpdateHandl
     }
 
     /**
-     * return ¤ËÄ¾ÀÜÈô¤ó¤Ç¤¤¤ë BranchInstruction ¤ò
-     * return ¤ÎÁ°¤Î¥È¥ì¡¼¥µ¤ËÈô¤Ö¤è¤¦¤ËÊÑ¹¹¤¹¤ë¡¥
+     * return ã«ç›´æ¥é£›ã‚“ã§ã„ã‚‹ BranchInstruction ã‚’
+     * return ã®å‰ã®ãƒˆãƒ¬ãƒ¼ã‚µã«é£›ã¶ã‚ˆã†ã«å¤‰æ›´ã™ã‚‹ï¼
      */
     private InstructionList updateBranchTarget(InstructionList list){
         InstructionHandle[] handles = list.getInstructionHandles();
@@ -85,7 +80,7 @@ public class ReturnInstructionUpdateHandler extends TracerInstructionUpdateHandl
                     };
                 }
 
-                // RETURN ¤ÎÁ°¤Î GETSTATIC ¤òÃµ¤·¡¤¤½¤³¤Ë target ¤òÃÖ¤¯¡¥
+                // RETURN ã®å‰ã® GETSTATIC ã‚’æ¢ã—ï¼Œãã“ã« target ã‚’ç½®ãï¼
                 for(int j = 0; j < targets.length; j++){
                     Instruction ii = targets[j].getInstruction();
                     InstructionHandle handle = targets[j];

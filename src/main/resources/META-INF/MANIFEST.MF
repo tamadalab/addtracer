@@ -1,2 +1,0 @@
-Premain-Class: jp.naist.se.addtracer.AddTracerAgent
-Boot-Class-Path: bcel-5.2.jar bcul-1.0.jar

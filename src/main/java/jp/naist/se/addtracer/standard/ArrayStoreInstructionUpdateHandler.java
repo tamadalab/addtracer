@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: ArrayStoreInstructionUpdateHandler.java,v 1.2 2005/07/25 07:33:06 harua-t Exp $
- */
-
 import org.apache.bcel.generic.Type;
 import org.apache.bcel.generic.Instruction;
 import org.apache.bcel.generic.InstructionHandle;
@@ -33,7 +29,6 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.2 $ $Date: 2005/07/25 07:33:06 $
  */
 public abstract class ArrayStoreInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     public boolean isTarget(InstructionHandle ih, UpdateData data){

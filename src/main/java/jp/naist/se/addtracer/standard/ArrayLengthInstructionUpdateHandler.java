@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: ArrayLengthInstructionUpdateHandler.java,v 1.1 2005/07/25 06:30:06 harua-t Exp $
- */
-
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
@@ -33,7 +29,6 @@ import org.apache.bcel.generic.Type;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.1 $ $Date: 2005/07/25 06:30:06 $
  */
 public class ArrayLengthInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     public boolean isTarget(InstructionHandle i, UpdateData data){

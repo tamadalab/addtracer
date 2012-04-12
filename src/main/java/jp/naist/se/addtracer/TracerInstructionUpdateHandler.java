@@ -31,10 +31,6 @@ import org.apache.bcel.generic.ReferenceType;
 import org.apache.bcel.generic.Type;
 
 /**
- * <p>
- * {@link jp.naist.se.addtracer.AddTracer <code>AddTracer</code>} $B~A%9%NFq%=%9~A%9~A%9~A%9~A%9~A%9~A%9(B
- * {@link InstructionUpdateHandler <code>InstructionUpdateHandler</code>}$B~A%9(BD
- * </p>
  *
  * @author Haruaki TAMADA
  */
@@ -57,11 +53,11 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * System#out $B~A%9~A%9~A%9(BI$B~A%9(By$B~A%9~A%9~A%9~A%9~A%9(Bh$B~A%9(BX$B~A%:~A%9(Bb$B~A%9(BN$B~A%9%N@Q$`Lq%=%9~A%9!,$q%=%9%d$q%=%9~A%9(BD
+     * System#out をスタックに積む．
      * </p><p>
-     * $B~A%9~A%9~A%9(Bs$B~A%9(BO: ...
+     * 実行前: ...
      * </p><p>
-     * $B~A%9~A%9~A%9(Bs$B~A%9~A%9(B: out
+     * 実行後: ..., out
      * </p>
      */
     public InstructionList pushSystemOut(UpdateData data){
@@ -73,12 +69,12 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * System#out $B~A%9~A%9~A%9(BI$B~A%9(By$B~A%9~A%9~A%9~A%9~A%9(Bh$B~A%9(BX$B~A%:~A%9(Bb$B~A%9(BN$B~A%9%N@Q$_!$(BStringBuffer $B~A%9~A%9(B
-     * $B~A%9~A%9~A%9~A%9~A%9%H%*~A%9(By$B~A%9~A%9~A%9~A%9~A%9(Bh$B~A%9(BX$B~A%:~A%9(Bb$B~A%9(BN$B~A%9%N@Q$`Lq%=%9~A%9!,$q%=%9%d$q%=%9~A%9(BD
+     * System#out をスタックに積み，StringBuffer を初期化する．
+     * このメソッド実行後，スタックの状態は以下の通りとなる(右がスタックの上部を表す)．
      * </p><p>
-     * $B~A%9~A%9~A%9(Bs$B~A%9(BO: ...
+     * 実行前: ...
      * </p><p>
-     * $B~A%9~A%9~A%9(Bs$B~A%9~A%9(B: stringbuffer, out
+     * 実行後: ..., out, stringbuffer
      * </p>
      */
     public InstructionList pushSystemOutAndStringBuffer(UpdateData data){
@@ -94,13 +90,15 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * System#out $B~A%9~A%9~A%9(BI$B~A%9(By$B~A%9~A%9~A%9~A%9~A%9(Bh$B~A%9(BX$B~A%:~A%9(Bb$B~A%9(BN$B~A%9%N@Q$_!$(BStringBuffer $B~A%9~A%9(B
-     * $B~A%9~A%9~A%9~A%9~A%9%H%*~A%9(By$B~A%9~A%9~A%9~A%9~A%9(Bh$B~A%9(BX$B~A%:~A%9(Bb$B~A%9(BN$B~A%9%N@Q$`Lq%=%9~A%9!,$q%=%9%d$q%=%9~A%9(BD$B~A%9~A%9~A%9%U$H$q%=%9~A%9(BC
-     * $B~A%9~A%9~A%9(B StringBuffer $B~A%9~A%9(B append $B~A%9~A%9~A%9~A%9%H$q%=%9~A%9~A%9(BD
+     * System#out をスタックに積み，StringBuffer を初期化して，引数に与
+     * えられた文字列を作成したStringBufferオブジェクトのappendメソッド
+     * を用いて連結する．
+
+     * このメソッド実行後，スタックの状態は以下の通りとなる(右がスタックの上部を表す)．
      * </p><p>
-     * $B~A%9~A%9~A%9(Bs$B~A%9(BO: ...
+     * 実行前: ...
      * </p><p>
-     * $B~A%9~A%9~A%9(Bs$B~A%9~A%9(B: stringbuffer, out
+     * 実行後: ..., out, stringbuffer
      * </p>
      */
     public InstructionList pushSystemOutAndStringBuffer(UpdateData data, String value){
@@ -112,12 +110,14 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * $B~A%9~A%9~A%9~A%9~A%9%N%*~A%9(By$B~A%9~A%9~A%9~A%9~A%9(Bh$B~A%9(BX$B~A%:~A%9(Bb$B~A%9(BN$B~A%9%N@Q$^$q%=%9%H$q%=%9~A%9~A%9%X$q%=%9~A%9~A%9(B StringBuffer $B~A%9~A%9(B append $B~A%9~A%9~A%9%H!$(B
-     * toString, println $B~A%9$(D+-(BsD
+     * 引数に与えられた文字列を既にスタックに積まれているStringBufferに
+     * 連結し(appendメソッドを呼び出し)このメソッド実行前に積まれた
+     * System#outとStringBufferをもとに，その内容を出力する．
+     * このメソッド実行後，スタックの状態は以下の通りとなる(右がスタックの上部を表す)．
      * </p><p>
-     * sO: stringbuffer, out
+     * 実行前: ..., out, stringbuffer
      * </p><p>
-     * s: ...
+     * 実行後: ...
      * </p>
      */
     public InstructionList getToStringAndPrintln(UpdateData data, String value){
@@ -129,11 +129,13 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * toString, println $(D+-(BsD
+     * このメソッド実行前に積まれたSystem#outとStringBufferをもとに，そ
+     * の内容を出力する．
+     * このメソッド実行後，スタックの状態は以下の通りとなる(右がスタックの上部を表す)．
      * </p><p>
-     * sO: stringbuffer, out
+     * 実行前: ..., out, stringbuffer
      * </p><p>
-     * s: ...
+     * 実行後: ...
      * </p>
      */
     public InstructionList getToStringAndPrintln(UpdateData data){
@@ -150,11 +152,13 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * IyhX^bN$(D&x*%(B StringBuffer  append D
+     * 引数に与えられた文字列を，既にスタックに積まれている
+     * StringBufferオブジェクトに連結する(appendメソッドを呼び出す)
+     * このメソッド実行後，スタックの状態は以下の通りとなる(右がスタックの上部を表す)．
      * </p><p>
-     * sO: stringbuffer
+     * 実行前: ..., stringbuffer
      * </p><p>
-     * s: ...
+     * 実行後: ..., stringbuffer
      * </p>
      */
     public InstructionList getAppendInstructions(UpdateData data, String value){
@@ -167,11 +171,13 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * IyhX^bN$(D&x*%(B StringBuffer  append D
+     * 引数に与えられた数値を，既にスタックに積まれている
+     * StringBufferオブジェクトに連結する(appendメソッドを呼び出す)
+     * このメソッド実行後，スタックの状態は以下の通りとなる(右がスタックの上部を表す)．
      * </p><p>
-     * sO: stringbuffer
+     * 実行前: ..., stringbuffer
      * </p><p>
-     * s: ...
+     * 実行後: ..., stringbuffer
      * </p>
      */
     public InstructionList getAppendInstructions(UpdateData data, Number number){
@@ -184,12 +190,12 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * StringBuffer  append lIyhX^bN$(D&x*%(BC
-     * \bh append Dtype  append l^D
+     * スタックに積まれた値を同じくスタックに積まれているStringBufferに連結する．
+     * このメソッド実行後，スタックの状態は以下の通りとなる(右がスタックの上部を表す)．
      * </p><p>
-     * sO: value, stringbuffer
+     * 実行前: ..., stringbuffer, value
      * </p><p>
-     * s: ...
+     * 実行後: ..., stringbuffer
      * </p>
      */
     public InstructionList getAppendInstructions(UpdateData data, Type type){
@@ -203,12 +209,7 @@ public abstract class TracerInstructionUpdateHandler extends AbstractInstruction
 
     /**
      * <p>
-     * StringBuffer ^D
-     * </p><p>
-     * CStringBuffer  String OIuWFNg^C
-     * Object ^ append $(D*%$B'q(BoKvD
-     * </p><p>
-     * ^^L$(D=y&u(BsCK^D
+     * StringBuffer のappendメソッドの引数の型を判定して返す．
      * </p>
      */
     public Type getStringBufferArgumentType(Type type){

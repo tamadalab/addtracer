@@ -14,16 +14,14 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: PutFieldInstructionUpdateHandler.java,v 1.3 2005/07/25 09:19:48 harua-t Exp $
- */
-
 import jp.cafebabe.commons.bcul.SWAP2;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 
 import org.apache.bcel.Constants;
+import org.apache.bcel.generic.DUP;
+import org.apache.bcel.generic.DUP2;
 import org.apache.bcel.generic.DUP2_X1;
 import org.apache.bcel.generic.DUP2_X2;
 import org.apache.bcel.generic.DUP_X2;
@@ -40,7 +38,6 @@ import org.apache.bcel.generic.Type;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.3 $ $Date: 2005/07/25 09:19:48 $
  */
 public class PutFieldInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     public boolean isTarget(InstructionHandle ih, UpdateData data){
@@ -67,25 +64,38 @@ public class PutFieldInstructionUpdateHandler extends TracerInstructionUpdateHan
         Type fieldType = i.getFieldType(d.getConstantPoolGen());
 
         InstructionList list = new InstructionList();
+        if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){
+            list.append(new DUP2());
+        }
+        else{
+            list.append(new DUP());
+        }
 
         list.append(pushSystemOutAndStringBuffer(
             d, className + "#" + fieldName + refType + "\t"
         ));
-
-        if(staticType){
-            list.append(d.getFactory().createGetStatic(className, fieldName, fieldType));
+        if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){
+            list.append(new DUP2_X2());
         }
         else{
-            list.append(d.getFactory().createGetField(className, fieldName, fieldType));
+            list.append(new DUP2_X1());
         }
+        list.append(new POP());
+        list.append(new POP());
+
         if(fieldType.equals(Type.BOOLEAN) || fieldType.equals(Type.INT) ||
            fieldType.equals(Type.BYTE)    || fieldType.equals(Type.SHORT) ||
            fieldType.equals(Type.FLOAT)   || fieldType.equals(Type.CHAR)  ||
-           fieldType.equals(Type.DOUBLE)  || fieldType.equals(Type.LONG)  ||
-           fieldType.equals(Type.STRING)){
+           fieldType.equals(Type.DOUBLE)  || fieldType.equals(Type.LONG)){
             list.append(getAppendInstructions(d, type));
         }
         else{
+            if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){
+                list.append(new DUP2_X2());
+            }
+            else{
+                list.append(new DUP_X2());
+            }
             list.append(d.getFactory().createInvoke(
                 "java.lang.Object", "getClass", new ObjectType(CLASS),
                 Type.NO_ARGS, Constants.INVOKEVIRTUAL
@@ -97,12 +107,14 @@ public class PutFieldInstructionUpdateHandler extends TracerInstructionUpdateHan
             list.append(getAppendInstructions(d, Type.STRING));
             list.append(getAppendInstructions(d, "@"));
 
-            if(staticType){
-                list.append(d.getFactory().createGetStatic(className, fieldName, fieldType));
+            if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){
+                list.append(new DUP2_X2());
             }
             else{
-                list.append(d.getFactory().createGetField(className, fieldName, fieldType));
+                list.append(new DUP2_X1());
             }
+            list.append(new POP());
+            list.append(new POP());
             list.append(d.getFactory().createInvoke(
                 "java.lang.System", "identityHashCode", Type.INT,
                 new Type[] {Type.OBJECT, }, Constants.INVOKESTATIC

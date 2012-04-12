@@ -14,10 +14,6 @@
  */
 package jp.naist.se.addtracer.standard;
 
-/*
- * $Id: LocalVariableInstructionUpdateHandler.java,v 1.3 2005/07/25 09:19:48 harua-t Exp $
- */
-
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
@@ -38,7 +34,6 @@ import org.apache.bcel.generic.Type;
 /**
  * 
  * @author Haruaki TAMADA
- * @version $Revision: 1.3 $ $Date: 2005/07/25 09:19:48 $
  */
 public class LocalVariableInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     public boolean isTarget(InstructionHandle ih, UpdateData data){
@@ -77,8 +72,7 @@ public class LocalVariableInstructionUpdateHandler extends TracerInstructionUpda
         if(!(realType.equals(Type.BOOLEAN) || realType.equals(Type.INT) ||
              realType.equals(Type.BYTE)    || realType.equals(Type.SHORT) ||
              realType.equals(Type.FLOAT)   || realType.equals(Type.CHAR)  ||
-             realType.equals(Type.DOUBLE)  || realType.equals(Type.LONG)  ||
-             realType.equals(Type.STRING))){
+             realType.equals(Type.DOUBLE)  || realType.equals(Type.LONG))){
             list.append(d.getFactory().createInvoke(
                 "java.lang.Object", "getClass", new ObjectType(CLASS), Type.NO_ARGS,
                 Constants.INVOKEVIRTUAL)
