@@ -6,7 +6,7 @@
   <groupId>jp.naist.se</groupId>
   <artifactId>addtracer</artifactId>
   <packaging>jar</packaging>
-  <version>2.3-SNAPSHOT</version>
+  <version>2.3</version>
   <name>AddTracer</name>
   <url>http://se.naist.jp/addtracer/</url>
   <inceptionYear>2003</inceptionYear>
