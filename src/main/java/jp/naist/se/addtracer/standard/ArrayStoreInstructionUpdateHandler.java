@@ -14,29 +14,31 @@
  */
 package jp.naist.se.addtracer.standard;
 
-import org.apache.bcel.generic.Type;
-import org.apache.bcel.generic.Instruction;
-import org.apache.bcel.generic.InstructionHandle;
-import org.apache.bcel.generic.InstructionList;
-import org.apache.bcel.generic.ArrayInstruction;
-import org.apache.bcel.generic.DUP2_X1;
-import org.apache.bcel.generic.POP2;
-
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
+
+import org.apache.bcel.generic.ArrayInstruction;
+import org.apache.bcel.generic.DUP2_X1;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.POP;
+import org.apache.bcel.generic.Type;
 
 /**
  * 
  * @author Haruaki TAMADA
  */
 public abstract class ArrayStoreInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         Instruction i = ih.getInstruction();
         String name = i.getName().toLowerCase();
         return i instanceof ArrayInstruction && name.indexOf("store") > 0;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.INSERT;
     }
@@ -46,11 +48,13 @@ public abstract class ArrayStoreInstructionUpdateHandler extends TracerInstructi
 
         list.append(pushSystemOutAndStringBuffer(data));
         list.append(new DUP2_X1());
-        list.append(new POP2());
+        list.append(new POP());
+        list.append(new POP());
         list.append(getAppendInstructions(data, Type.OBJECT));
         list.append(getAppendInstructions(data, "["));
         list.append(new DUP2_X1());
-        list.append(new POP2());
+        list.append(new POP());
+        list.append(new POP());
         list.append(getAppendInstructions(data, Type.INT));
         list.append(getAppendInstructions(data, "]\t"));
 

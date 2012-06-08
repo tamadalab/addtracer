@@ -14,19 +14,17 @@
  */
 package jp.naist.se.addtracer.standard;
 
-import jp.cafebabe.commons.bcul.SWAP2;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 
 import org.apache.bcel.Constants;
+import org.apache.bcel.generic.BasicType;
 import org.apache.bcel.generic.DUP;
 import org.apache.bcel.generic.DUP2;
 import org.apache.bcel.generic.DUP2_X1;
 import org.apache.bcel.generic.DUP2_X2;
-import org.apache.bcel.generic.DUP_X2;
 import org.apache.bcel.generic.FieldInstruction;
-import org.apache.bcel.generic.IAND;
 import org.apache.bcel.generic.Instruction;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
@@ -39,24 +37,27 @@ import org.apache.bcel.generic.Type;
  * @author Haruaki TAMADA
  */
 public class GetFieldInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         Instruction i = ih.getInstruction();
         return i instanceof FieldInstruction && !(i instanceof PopInstruction);
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.APPEND;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData data){
         FieldInstruction i = (FieldInstruction)handle.getInstruction();
         String fieldName = i.getFieldName(data.getConstantPoolGen());
+        String className = i.getReferenceType(data.getConstantPoolGen()).toString();
         String refType = "";
         if(i.getClass().getName().toLowerCase().indexOf("static") > 0){
             refType = "<s>";
         }
 
-        Type type = getStringBufferArgumentType(i.getType(data.getConstantPoolGen()));
         Type fieldType = i.getFieldType(data.getConstantPoolGen());
 
         InstructionList list = new InstructionList();
@@ -68,39 +69,22 @@ public class GetFieldInstructionUpdateHandler extends TracerInstructionUpdateHan
             list.append(new DUP());
         }
         list.append(pushSystemOutAndStringBuffer(
-            data, i.getClassName(data.getConstantPoolGen()) + "#" + fieldName + refType + "\t"
+            data, className + "#" + fieldName + refType + "\t"
         ));
-        if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){
-            list.append(new DUP2_X2());
-        }
-        else{
-            list.append(new DUP2_X1());
-        }
-        list.append(new POP());
-        list.append(new POP());
 
-        if(fieldType.equals(Type.BOOLEAN) || fieldType.equals(Type.INT) ||
-           fieldType.equals(Type.BYTE)    || fieldType.equals(Type.SHORT) ||
-           fieldType.equals(Type.FLOAT)   || fieldType.equals(Type.CHAR)  ||
-           fieldType.equals(Type.DOUBLE)  || fieldType.equals(Type.LONG)){
-            list.append(getAppendInstructions(data, fieldType));
-        }
-        else{
-            if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){
+        if(fieldType instanceof BasicType){
+            if(fieldType.equals(Type.DOUBLE)  || fieldType.equals(Type.LONG)){
                 list.append(new DUP2_X2());
             }
             else{
-                list.append(new DUP_X2());
+                list.append(new DUP2_X1());
             }
-            list.append(data.getFactory().createInvoke(
-                "java.lang.Object", "getClass", Type.CLASS,
-                new Type[0], Constants.INVOKEVIRTUAL
-            ));
-            list.append(data.getFactory().createInvoke(
-                "java.lang.Class", "getName", Type.STRING,
-                new Type[0], Constants.INVOKEVIRTUAL
-            ));
-            list.append(getAppendInstructions(data, Type.STRING));
+            list.append(new POP());
+            list.append(new POP());
+            list.append(getAppendInstructions(data, fieldType));
+        }
+        else{
+            list.append(getAppendInstructions(data, fieldType.toString()));
             list.append(getAppendInstructions(data, "@"));
 
             if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){

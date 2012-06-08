@@ -14,28 +14,31 @@
  */
 package jp.naist.se.addtracer.standard;
 
+import jp.cafebabe.commons.bcul.updater.UpdateData;
+import jp.cafebabe.commons.bcul.updater.UpdateType;
+import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
+
 import org.apache.bcel.generic.ConstantPushInstruction;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.Type;
-
-import jp.cafebabe.commons.bcul.updater.UpdateData;
-import jp.cafebabe.commons.bcul.updater.UpdateType;
-import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 
 /**
  * 
  * @author Haruaki TAMADA
  */
 public class ConstantPushInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle i, UpdateData data){
         return i.getInstruction() instanceof ConstantPushInstruction;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle handle){
         return UpdateType.APPEND;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         ConstantPushInstruction i = (ConstantPushInstruction)handle.getInstruction();
 

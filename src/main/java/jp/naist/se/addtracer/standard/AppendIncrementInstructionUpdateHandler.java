@@ -14,31 +14,32 @@
  */
 package jp.naist.se.addtracer.standard;
 
-import org.apache.bcel.Constants;
-import org.apache.bcel.generic.IAND;
+import jp.cafebabe.commons.bcul.updater.UpdateData;
+import jp.cafebabe.commons.bcul.updater.UpdateType;
+import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
+
 import org.apache.bcel.generic.IINC;
 import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.Type;
 
-import jp.cafebabe.commons.bcul.updater.UpdateData;
-import jp.cafebabe.commons.bcul.updater.UpdateType;
-import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
-
 /**
  * 
  * @author Haruaki TAMADA
  */
 public class AppendIncrementInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle i, UpdateData data){
         return i.getInstruction() instanceof IINC;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.APPEND;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         IINC iinc = (IINC)handle.getInstruction();
         Type type = iinc.getType(d.getConstantPoolGen());

@@ -19,18 +19,17 @@ import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 
 import org.apache.bcel.Constants;
-import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.Constant;
-import org.apache.bcel.classfile.ConstantString;
-import org.apache.bcel.classfile.ConstantInteger;
-import org.apache.bcel.classfile.ConstantFloat;
-import org.apache.bcel.classfile.ConstantLong;
 import org.apache.bcel.classfile.ConstantDouble;
-import org.apache.bcel.generic.ClassGen;
+import org.apache.bcel.classfile.ConstantFloat;
+import org.apache.bcel.classfile.ConstantInteger;
+import org.apache.bcel.classfile.ConstantLong;
+import org.apache.bcel.classfile.ConstantString;
+import org.apache.bcel.classfile.Field;
 import org.apache.bcel.generic.ALOAD;
 import org.apache.bcel.generic.ARRAYLENGTH;
 import org.apache.bcel.generic.ArrayType;
-import org.apache.bcel.generic.IAND;
+import org.apache.bcel.generic.ClassGen;
 import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
@@ -44,19 +43,23 @@ import org.apache.bcel.generic.Type;
 public class StartOfMethodInstructionUpdateHandler extends TracerInstructionUpdateHandler{
     private boolean firstStaticInitializer = true;
 
+    @Override
     public void reset(){
         super.reset();
         firstStaticInitializer = true;
     }
 
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         return data.getTargetIndex() == 0;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.INSERT;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         InstructionList list = new InstructionList();
 

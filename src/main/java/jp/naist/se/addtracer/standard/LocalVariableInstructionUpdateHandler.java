@@ -20,7 +20,7 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.CodeException;
-import org.apache.bcel.generic.IAND;
+import org.apache.bcel.generic.BasicType;
 import org.apache.bcel.generic.IINC;
 import org.apache.bcel.generic.Instruction;
 import org.apache.bcel.generic.InstructionFactory;
@@ -28,7 +28,6 @@ import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.LoadInstruction;
 import org.apache.bcel.generic.LocalVariableInstruction;
-import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.Type;
 
 /**
@@ -36,15 +35,19 @@ import org.apache.bcel.generic.Type;
  * @author Haruaki TAMADA
  */
 public class LocalVariableInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         Instruction i = ih.getInstruction();
         return i instanceof LocalVariableInstruction && !(i instanceof IINC);
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.APPEND;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         LocalVariableInstruction i = (LocalVariableInstruction)handle.getInstruction();
         int index = i.getIndex();
@@ -60,30 +63,19 @@ public class LocalVariableInstructionUpdateHandler extends TracerInstructionUpda
             value = "<!-- begin Exception catch ";
         }
 
-        // System.out.println("type: " + type + "(" + type.getSize() + "): " + index);
-        // System.out.println("real type: " + realType + "(" + realType.getSize() + "): " + index);
+        // System.out.printf("type: %s (%d:%d): %d%n", type, type.getSize(), type.getType(), index);
+        // System.out.printf("real type: %s (%d:%d): %d%n", realType, realType.getSize(), realType.getType(), index);
         // if(type.getSize() == 2){
         //     index = (index * 2) - 1;
         // }
 
         list.append(pushSystemOutAndStringBuffer(d, value));
+        list.append(getAppendInstructions(d, realType.toString()));
+        
+        list.append(getAppendInstructions(d, "@"));
         list.append(InstructionFactory.createLoad(realType, index));
 
-        if(!(realType.equals(Type.BOOLEAN) || realType.equals(Type.INT) ||
-             realType.equals(Type.BYTE)    || realType.equals(Type.SHORT) ||
-             realType.equals(Type.FLOAT)   || realType.equals(Type.CHAR)  ||
-             realType.equals(Type.DOUBLE)  || realType.equals(Type.LONG))){
-            list.append(d.getFactory().createInvoke(
-                "java.lang.Object", "getClass", new ObjectType(CLASS), Type.NO_ARGS,
-                Constants.INVOKEVIRTUAL)
-            );
-            list.append(d.getFactory().createInvoke(
-                CLASS, "getName", Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL)
-            );
-            list.append(getAppendInstructions(d, Type.STRING));
-            list.append(getAppendInstructions(d, "@"));
-
-            list.append(InstructionFactory.createLoad(realType, index));
+        if(!(realType instanceof BasicType)){
             list.append(d.getFactory().createInvoke(
                 "java.lang.System", "identityHashCode", Type.INT,
                 new Type[] { Type.OBJECT, }, Constants.INVOKESTATIC
@@ -96,13 +88,6 @@ public class LocalVariableInstructionUpdateHandler extends TracerInstructionUpda
         }
 
         if(catchException){
-            list.append(d.getFactory().createInvoke(
-                "java.lang.Object", "getClass", new ObjectType(CLASS), Type.NO_ARGS,
-                Constants.INVOKEVIRTUAL
-            ));
-            list.append(d.getFactory().createInvoke(
-                CLASS, "getName", Type.STRING, Type.NO_ARGS, Constants.INVOKEVIRTUAL
-            ));
             value = "\t// line " + d.getLineNumber() + "-->";
         }
         else{

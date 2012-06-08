@@ -14,23 +14,20 @@
  */
 package jp.naist.se.addtracer.standard;
 
-import jp.cafebabe.commons.bcul.SWAP2;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 
 import org.apache.bcel.Constants;
+import org.apache.bcel.generic.BasicType;
 import org.apache.bcel.generic.DUP;
 import org.apache.bcel.generic.DUP2;
 import org.apache.bcel.generic.DUP2_X1;
 import org.apache.bcel.generic.DUP2_X2;
-import org.apache.bcel.generic.DUP_X2;
 import org.apache.bcel.generic.FieldInstruction;
-import org.apache.bcel.generic.IAND;
 import org.apache.bcel.generic.Instruction;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
-import org.apache.bcel.generic.ObjectType;
 import org.apache.bcel.generic.POP;
 import org.apache.bcel.generic.PopInstruction;
 import org.apache.bcel.generic.Type;
@@ -40,23 +37,24 @@ import org.apache.bcel.generic.Type;
  * @author Haruaki TAMADA
  */
 public class PutFieldInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         Instruction i = ih.getInstruction();
         return i instanceof FieldInstruction && i instanceof PopInstruction;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.INSERT;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         FieldInstruction i = (FieldInstruction)handle.getInstruction();
         String fieldName = i.getFieldName(d.getConstantPoolGen());
         String refType = "";
-        boolean staticType = false;
-        String className = i.getClassName(d.getConstantPoolGen());
+        String className = i.getReferenceType(d.getConstantPoolGen()).toString();
         if(i.getClass().getName().toLowerCase().indexOf("static") > 0){
-            staticType = true;
             refType = "<s>";
         }
 
@@ -74,37 +72,20 @@ public class PutFieldInstructionUpdateHandler extends TracerInstructionUpdateHan
         list.append(pushSystemOutAndStringBuffer(
             d, className + "#" + fieldName + refType + "\t"
         ));
-        if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){
-            list.append(new DUP2_X2());
-        }
-        else{
-            list.append(new DUP2_X1());
-        }
-        list.append(new POP());
-        list.append(new POP());
 
-        if(fieldType.equals(Type.BOOLEAN) || fieldType.equals(Type.INT) ||
-           fieldType.equals(Type.BYTE)    || fieldType.equals(Type.SHORT) ||
-           fieldType.equals(Type.FLOAT)   || fieldType.equals(Type.CHAR)  ||
-           fieldType.equals(Type.DOUBLE)  || fieldType.equals(Type.LONG)){
-            list.append(getAppendInstructions(d, type));
-        }
-        else{
-            if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){
+        if(fieldType instanceof BasicType){
+            if(fieldType.equals(Type.DOUBLE)  || fieldType.equals(Type.LONG)){
                 list.append(new DUP2_X2());
             }
             else{
-                list.append(new DUP_X2());
+                list.append(new DUP2_X1());
             }
-            list.append(d.getFactory().createInvoke(
-                "java.lang.Object", "getClass", new ObjectType(CLASS),
-                Type.NO_ARGS, Constants.INVOKEVIRTUAL
-            ));
-            list.append(d.getFactory().createInvoke(
-                "java.lang.Class", "getName", Type.STRING,
-                Type.NO_ARGS, Constants.INVOKEVIRTUAL
-            ));
-            list.append(getAppendInstructions(d, Type.STRING));
+            list.append(new POP());
+            list.append(new POP());
+            list.append(getAppendInstructions(d, type));
+        }
+        else{
+            list.append(getAppendInstructions(d, fieldType.toString()));
             list.append(getAppendInstructions(d, "@"));
 
             if(fieldType.equals(Type.LONG) || fieldType.equals(Type.DOUBLE)){

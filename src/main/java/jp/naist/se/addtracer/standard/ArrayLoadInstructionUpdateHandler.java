@@ -21,16 +21,16 @@ import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ArrayInstruction;
+import org.apache.bcel.generic.BasicType;
 import org.apache.bcel.generic.DUP2;
 import org.apache.bcel.generic.DUP2_X1;
 import org.apache.bcel.generic.DUP2_X2;
 import org.apache.bcel.generic.DUP_X2;
-import org.apache.bcel.generic.IAND;
-import org.apache.bcel.generic.POP;
-import org.apache.bcel.generic.SWAP;
 import org.apache.bcel.generic.Instruction;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.POP;
+import org.apache.bcel.generic.SWAP;
 import org.apache.bcel.generic.Type;
 
 /**
@@ -38,6 +38,7 @@ import org.apache.bcel.generic.Type;
  * @author Haruaki TAMADA
  */
 public class ArrayLoadInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         Instruction i = ih.getInstruction();
         String name = i.getName().toLowerCase();
@@ -45,15 +46,15 @@ public class ArrayLoadInstructionUpdateHandler extends TracerInstructionUpdateHa
         return i instanceof ArrayInstruction && name.indexOf("load") >= 0;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.INSERT;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         ArrayInstruction i = (ArrayInstruction)handle.getInstruction();
-
         Type origType = i.getType(d.getConstantPoolGen());
-        Type type = getStringBufferArgumentType(origType);
 
         InstructionList list = new InstructionList();
         list.append(new DUP2());
@@ -69,10 +70,7 @@ public class ArrayLoadInstructionUpdateHandler extends TracerInstructionUpdateHa
         list.append(new POP());
         list.append(new POP());
         list.append(getAppendInstructions(d, Type.INT));
-        if(origType.equals(Type.INT)   || origType.equals(Type.BYTE)   ||
-           origType.equals(Type.SHORT) || origType.equals(Type.CHAR)   ||
-           origType.equals(Type.LONG)  || origType.equals(Type.DOUBLE) ||
-           origType.equals(Type.FLOAT) || origType.equals(Type.BOOLEAN)){
+        if(origType instanceof BasicType){
             list.append(getAppendInstructions(d, "]\t"));
         }
         else{
@@ -81,11 +79,8 @@ public class ArrayLoadInstructionUpdateHandler extends TracerInstructionUpdateHa
         list.append(new SWAP2());
         list.append(new DUP2_X2());
         list.append(i.copy());
-        if(origType.equals(Type.INT)   || origType.equals(Type.BYTE)   ||
-           origType.equals(Type.SHORT) || origType.equals(Type.CHAR)   ||
-           origType.equals(Type.LONG)  || origType.equals(Type.DOUBLE) ||
-           origType.equals(Type.FLOAT) || origType.equals(Type.BOOLEAN)){
-            list.append(getAppendInstructions(d, origType));
+        if(origType instanceof BasicType){
+            list.append(getAppendInstructions(d, getStringBufferArgumentType(origType)));
         }
         else{
             list.append(new DUP_X2());

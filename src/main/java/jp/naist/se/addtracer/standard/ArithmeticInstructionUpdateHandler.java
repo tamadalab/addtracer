@@ -14,29 +14,29 @@
  */
 package jp.naist.se.addtracer.standard;
 
-import org.apache.bcel.Constants;
+import jp.cafebabe.commons.bcul.updater.UpdateData;
+import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
+
 import org.apache.bcel.generic.ArithmeticInstruction;
 import org.apache.bcel.generic.DUP2_X1;
 import org.apache.bcel.generic.DUP2_X2;
-import org.apache.bcel.generic.IAND;
 import org.apache.bcel.generic.InstructionFactory;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
 import org.apache.bcel.generic.POP;
 import org.apache.bcel.generic.Type;
 
-import jp.cafebabe.commons.bcul.updater.UpdateData;
-import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
-
 /**
  * 
  * @author Haruaki TAMADA
  */
 public class ArithmeticInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle i, UpdateData data){
         return i.getInstruction() instanceof ArithmeticInstruction;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         ArithmeticInstruction i = (ArithmeticInstruction)handle.getInstruction();
 

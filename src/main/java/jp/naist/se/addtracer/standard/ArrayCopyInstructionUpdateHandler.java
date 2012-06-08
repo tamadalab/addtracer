@@ -42,33 +42,39 @@ import org.apache.bcel.generic.Type;
 public class ArrayCopyInstructionUpdateHandler extends TracerInstructionUpdateHandler implements MethodCreatable{
     private Method arraycopy = null;
 
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         Instruction i = ih.getInstruction();
         if(i instanceof INVOKESTATIC){
-            String className = ((INVOKESTATIC)i).getClassName(data.getConstantPoolGen());
+            String className = ((INVOKESTATIC)i).getReferenceType(data.getConstantPoolGen()).toString();
             String invokeMethod = ((INVOKESTATIC)i).getMethodName(data.getConstantPoolGen());
             return className.equals("java.lang.System") && invokeMethod.equals("arraycopy");
         }
         return false;
     }
 
+    @Override
     public void reset(){
         super.reset();
         arraycopy = null;
     }
 
+    @Override
     public Method[] getMethods(){
         return new Method[] { arraycopy, };
     }
 
+    @Override
     public boolean isContain(){
         return arraycopy != null;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.REPLACE;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         ClassGen cg = d.getClassGen();
 

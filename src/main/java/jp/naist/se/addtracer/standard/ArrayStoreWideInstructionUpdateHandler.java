@@ -20,7 +20,6 @@ import jp.cafebabe.commons.bcul.updater.UpdateData;
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ArrayInstruction;
 import org.apache.bcel.generic.DASTORE;
-import org.apache.bcel.generic.DUP;
 import org.apache.bcel.generic.DUP2_X2;
 import org.apache.bcel.generic.Instruction;
 import org.apache.bcel.generic.InstructionHandle;
@@ -36,11 +35,13 @@ import org.apache.bcel.generic.Type;
  * @author Haruaki TAMADA
  */
 public class ArrayStoreWideInstructionUpdateHandler extends ArrayStoreInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         Instruction i = ih.getInstruction();
         return super.isTarget(ih, data) && (i instanceof DASTORE || i instanceof LASTORE);
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         ArrayInstruction i = (ArrayInstruction)handle.getInstruction();
         Type origType = i.getType(d.getConstantPoolGen());

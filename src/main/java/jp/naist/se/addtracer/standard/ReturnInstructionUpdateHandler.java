@@ -14,35 +14,38 @@
  */
 package jp.naist.se.addtracer.standard;
 
-import java.util.List;
 import java.util.ArrayList;
-
-import org.apache.bcel.generic.Instruction;
-import org.apache.bcel.generic.BranchInstruction;
-import org.apache.bcel.generic.Select;
-import org.apache.bcel.generic.GETSTATIC;
-import org.apache.bcel.generic.InstructionHandle;
-import org.apache.bcel.generic.InstructionList;
-import org.apache.bcel.generic.ReturnInstruction;
+import java.util.List;
 
 import jp.cafebabe.commons.bcul.updater.PostProcessRequired;
 import jp.cafebabe.commons.bcul.updater.UpdateData;
 import jp.cafebabe.commons.bcul.updater.UpdateType;
 import jp.naist.se.addtracer.TracerInstructionUpdateHandler;
 
+import org.apache.bcel.generic.BranchInstruction;
+import org.apache.bcel.generic.GETSTATIC;
+import org.apache.bcel.generic.Instruction;
+import org.apache.bcel.generic.InstructionHandle;
+import org.apache.bcel.generic.InstructionList;
+import org.apache.bcel.generic.ReturnInstruction;
+import org.apache.bcel.generic.Select;
+
 /**
  * 
  * @author Haruaki TAMADA
  */
 public class ReturnInstructionUpdateHandler extends TracerInstructionUpdateHandler implements PostProcessRequired{
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         return ih.getInstruction() instanceof ReturnInstruction;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.INSERT;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         return d.getFactory().createPrintln(
             "<!-- end Method " + d.getClassName() +
@@ -51,6 +54,7 @@ public class ReturnInstructionUpdateHandler extends TracerInstructionUpdateHandl
         );
     }
 
+    @Override
     public void postprocess(InstructionList list, UpdateData d){
         updateBranchTarget(list);
     }
@@ -67,8 +71,10 @@ public class ReturnInstructionUpdateHandler extends TracerInstructionUpdateHandl
                 InstructionHandle[] targets;
                 if(inst instanceof Select){
                     InstructionHandle[] h = ((Select)inst).getTargets();
-                    List l = new ArrayList();
-                    for(int k = 0; k < h.length; k++) l.add(h[k]);
+                    List<InstructionHandle> l = new ArrayList<InstructionHandle>();
+                    for(int k = 0; k < h.length; k++){
+                        l.add(h[k]);
+                    }
                     l.add(((Select)inst).getTarget());
                     targets = (InstructionHandle[])l.toArray(
                         new InstructionHandle[l.size()]

@@ -18,11 +18,10 @@ import jp.cafebabe.commons.bcul.updater.UpdateData;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.generic.ArrayInstruction;
+import org.apache.bcel.generic.BasicType;
 import org.apache.bcel.generic.DASTORE;
 import org.apache.bcel.generic.DUP2_X1;
-import org.apache.bcel.generic.DUP_X1;
 import org.apache.bcel.generic.DUP_X2;
-import org.apache.bcel.generic.IAND;
 import org.apache.bcel.generic.Instruction;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
@@ -36,11 +35,13 @@ import org.apache.bcel.generic.Type;
  * @author Haruaki TAMADA
  */
 public class ArrayStoreNonWideInstructionUpdateHandler extends ArrayStoreInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle ih, UpdateData data){
         Instruction i = ih.getInstruction();
         return super.isTarget(ih, data) && !(i instanceof DASTORE || i instanceof LASTORE);
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         ArrayInstruction i = (ArrayInstruction)handle.getInstruction();
         Type origType = i.getType(d.getConstantPoolGen());
@@ -60,10 +61,7 @@ public class ArrayStoreNonWideInstructionUpdateHandler extends ArrayStoreInstruc
         list.append(new POP());
         list.append(new POP());
 
-        if(origType.equals(Type.BOOLEAN) || origType.equals(Type.INT) ||
-           origType.equals(Type.BYTE)    || origType.equals(Type.SHORT) ||
-           origType.equals(Type.FLOAT)   || origType.equals(Type.CHAR)  ||
-           origType.equals(Type.STRING)){
+        if(origType instanceof BasicType || origType.equals(Type.STRING)){
             list.append(getAppendInstructions(d, type));
         }
         else{

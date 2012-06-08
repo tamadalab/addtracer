@@ -32,14 +32,17 @@ import org.apache.bcel.generic.Type;
  * @author Haruaki TAMADA
  */
 public class AthrowInstructionUpdateHandler extends TracerInstructionUpdateHandler{
+    @Override
     public boolean isTarget(InstructionHandle i, UpdateData data){
         return i.getInstruction() instanceof ATHROW;
     }
 
+    @Override
     public UpdateType getUpdateType(InstructionHandle i){
         return UpdateType.INSERT;
     }
 
+    @Override
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         InstructionList list = new InstructionList();
         list.append(pushSystemOutAndStringBuffer(d, "<!-- begin Exception throw "));
