@@ -60,6 +60,16 @@ switch instruction. The patch of this page fixes this problem.
 
 *Changes
 
+ [version 2.4]
+   Bug fixed: Verify error on ATHROW instruction.
+
+   Bug fixed: abstract method and native method were not added to transformed class.
+
+ [version 2.3]
+   Bug fixed: verify error on addtracing putfield/putstatic/getfield/getstatic instructions when null was assigned/referenced.
+
+   Bug fixed: NoSuchMethodError was thrown when using byte array.
+
  [version 2.2]
    Bug fixed: fix typo. assingment -&amp; assignment
 

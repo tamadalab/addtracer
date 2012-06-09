@@ -58,7 +58,7 @@ usage: java -jar addtracer-X.X.jar [options...] <classes...|jars...>
  -l,--license                     Print license of AddTracer
  -v,--version                     Print AddTracer version
 
-AddTracer version 2.3
+AddTracer version 2.4
 Copyright (C) 2003-2012 by Haruaki TAMADA
 ----
 
@@ -175,8 +175,8 @@ usage: java -jar runner.jar [options...] <jar [args]>
  -l,--license                     Print license of AddTracer
  -v,--version                     Print AddTracer version
 
-AddTracer version 2.3
-Copyright (C) 2003-2006 by Haruaki TAMADA
+AddTracer version 2.4
+Copyright (C) 2003-2012 by Haruaki TAMADA
 ----
 
 *DonQuixote Plugins
@@ -198,7 +198,7 @@ Typical Scenario
 
 ----
 $ ls
-HelloWorld.class    HelloWorld.java    addtracer-2.3
+HelloWorld.class    HelloWorld.java    addtracer-2.4
 $ cat HelloWorld.java
 public class HelloWorld{
     public static void main(String[] args){
@@ -207,9 +207,9 @@ public class HelloWorld{
 }
 $ java HelloWorld
 Hello World!
-$ java -jar addtracer-2.3/target/addtracer-2.3.jar -d dest HelloWorld.class
+$ java -jar addtracer-2.4/target/addtracer-2.4.jar -d dest HelloWorld.class
 $ ls
-dest HelloWorld.class    HelloWorld.java    addtracer-2.3
+dest HelloWorld.class    HelloWorld.java    addtracer-2.4
 $ ls dest
 HelloWorld.class
 $ java -classpath dest HelloWorld
@@ -225,7 +225,7 @@ Hello World!
 
 ----
 $ ls
-HelloWorld.class    HelloWorld.java    manifest.mf    addtracer-2.3
+HelloWorld.class    HelloWorld.java    manifest.mf    addtracer-2.4
 $ cat HelloWorld.java
 public class HelloWorld{
     public static void main(String[] args){
@@ -237,7 +237,7 @@ Main-Class: HelloWorld
 $ jar cfm hello.jar manifest.mf HelloWorld.class
 $ java -jar hello.jar
 Hello World!
-$ java -jar addtracer-2.3/targets/runner.jar hello.jar
+$ java -jar addtracer-2.4/targets/runner.jar hello.jar
 <!-- begin Method HelloWorld#main       // line 3 defined in - -->
 arg0[0-0]       *       assignment      // line 3
 arg0.length     0       assignment      // line 3
