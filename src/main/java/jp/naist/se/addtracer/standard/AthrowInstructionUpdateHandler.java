@@ -24,7 +24,7 @@ import org.apache.bcel.generic.DUP2_X1;
 import org.apache.bcel.generic.DUP_X2;
 import org.apache.bcel.generic.InstructionHandle;
 import org.apache.bcel.generic.InstructionList;
-import org.apache.bcel.generic.POP2;
+import org.apache.bcel.generic.POP;
 import org.apache.bcel.generic.Type;
 
 /**
@@ -46,8 +46,28 @@ public class AthrowInstructionUpdateHandler extends TracerInstructionUpdateHandl
     public InstructionList updateInstruction(InstructionHandle handle, UpdateData d){
         InstructionList list = new InstructionList();
         list.append(pushSystemOutAndStringBuffer(d, "<!-- begin Exception throw "));
+
         list.append(new DUP2_X1());
-        list.append(new POP2());
+        list.append(new POP());
+        list.append(new POP());
+        list.append(new DUP_X2());
+        list.append(d.getFactory().createInvoke(
+            "java.lang.Object", "getClass", Type.CLASS,
+            new Type[0], Constants.INVOKEVIRTUAL
+        ));
+        list.append(d.getFactory().createInvoke(
+            "java.lang.Class", "getName", Type.STRING,
+            new Type[0], Constants.INVOKEVIRTUAL
+        ));
+        list.append(d.getFactory().createInvoke(
+            STRINGBUFFER, "append", Type.STRINGBUFFER,
+            new Type[] { Type.STRING, }, Constants.INVOKEVIRTUAL
+        ));
+        list.append(getAppendInstructions(d, "@"));
+
+        list.append(new DUP2_X1());
+        list.append(new POP());
+        list.append(new POP());
         list.append(new DUP_X2());
         list.append(d.getFactory().createInvoke(
             "java.lang.System", "identityHashCode", Type.INT,
@@ -57,7 +77,6 @@ public class AthrowInstructionUpdateHandler extends TracerInstructionUpdateHandl
             STRINGBUFFER, "append", Type.STRINGBUFFER,
             new Type[] { Type.INT, }, Constants.INVOKEVIRTUAL
         ));
-        list.append(getAppendInstructions(d, Type.OBJECT));
         list.append(getToStringAndPrintln(d, "\t// line " + d.getLineNumber() + " -->"));
 
         return list;
