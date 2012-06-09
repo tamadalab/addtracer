@@ -59,6 +59,9 @@ public class BytecodeUpdater implements InstructionUpdateHandlerManager{
 
                 updateMethod(methodGen);
             }
+            else{
+                methodList.add(methods[i]);
+            }
         }
         return commit();
     }
